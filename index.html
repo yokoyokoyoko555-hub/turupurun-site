@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>株式会社ツルプルン</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Noto+Serif+JP:wght@300;400&family=Noto+Sans+JP:wght@300;400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="common.css">
+<style>
+/* ── HERO ── */
+.hero {
+  min-height: 100vh;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  border-bottom: 1px solid var(--line);
+}
+.hero-left {
+  padding: 160px 80px 100px 60px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  border-right: 1px solid var(--line);
+  position: relative;
+}
+.hero-eyebrow {
+  position: absolute;
+  top: 84px; left: 60px;
+  font-family: 'Noto Sans JP', sans-serif;
+  font-size: 0.68rem;
+  letter-spacing: 0.25em;
+  color: var(--muted);
+}
+.hero-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-weight: 300;
+  font-size: clamp(3.2rem, 5.5vw, 5.5rem);
+  line-height: 1.15;
+  letter-spacing: -0.01em;
+  color: var(--black);
+  margin-bottom: 40px;
+}
+.hero-title em { font-style:italic; color:var(--wine); }
+.hero-body {
+  font-size: 0.9rem;
+  line-height: 2.2;
+  color: var(--muted);
+  max-width: 340px;
+  margin-bottom: 52px;
+}
+.hero-right {
+  padding: 160px 60px 100px 80px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  gap: 0;
+}
+
+/* ── BIZ CARDS ── */
+.biz-cards { display:flex; flex-direction:column; gap:0; }
+.biz-card {
+  padding: 48px 0;
+  border-bottom: 1px solid var(--line);
+  display: grid;
+  grid-template-columns: 80px 1fr auto;
+  gap: 32px;
+  align-items: center;
+  text-decoration: none;
+  color: inherit;
+  transition: background 0.3s;
+  margin: 0 -60px;
+  padding-left: 80px;
+  padding-right: 60px;
+}
+.biz-card:first-child { border-top: 1px solid var(--line); }
+.biz-card:hover { background: var(--off); }
+.biz-card:hover .biz-arrow { transform: translateX(6px); color: var(--wine); }
+
+.biz-num {
+  font-family: 'Cormorant Garamond', serif;
+  font-weight: 300;
+  font-size: 2rem;
+  color: var(--line);
+  line-height: 1;
+}
+.biz-info {}
+.biz-en {
+  font-family: 'Noto Sans JP', sans-serif;
+  font-weight: 300;
+  font-size: 0.62rem;
+  letter-spacing: 0.2em;
+  color: var(--muted);
+  text-transform: uppercase;
+  display: block;
+  margin-bottom: 6px;
+}
+.biz-name {
+  font-family: 'Cormorant Garamond', serif;
+  font-weight: 600;
+  font-size: 1.5rem;
+  letter-spacing: 0.04em;
+  color: var(--black);
+  display: block;
+  margin-bottom: 8px;
+}
+.biz-desc {
+  font-family: 'Noto Sans JP', sans-serif;
+  font-weight: 300;
+  font-size: 0.72rem;
+  line-height: 1.8;
+  color: var(--muted);
+}
+.biz-arrow {
+  font-size: 1.1rem;
+  color: var(--line);
+  transition: transform 0.3s, color 0.3s;
+  flex-shrink: 0;
+}
+
+/* ── ABOUT STRIP ── */
+.about-strip {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  border-bottom: 1px solid var(--line);
+}
+.about-left {
+  padding: 100px 80px 100px 60px;
+  border-right: 1px solid var(--line);
+}
+.about-left .sec-title { font-size: clamp(2.2rem,3.5vw,3.5rem); margin-bottom: 36px; }
+.about-body {
+  font-size: 0.9rem;
+  line-height: 2.3;
+  color: var(--muted);
+  margin-bottom: 44px;
+}
+.about-body strong { color: var(--dark); font-weight:400; }
+.about-table { width:100%; border-collapse:collapse; }
+.about-table tr { border-bottom: 1px solid var(--line); }
+.about-table tr:first-child { border-top: 1px solid var(--line); }
+.about-table td { padding:16px 0; font-size:0.82rem; vertical-align:top; line-height:1.8; }
+.about-table td:first-child {
+  font-family: 'Noto Sans JP', sans-serif;
+  font-weight: 300;
+  font-size: 0.65rem;
+  letter-spacing: 0.15em;
+  color: var(--muted);
+  text-transform: uppercase;
+  width: 110px;
+  padding-right: 20px;
+}
+.about-table td:last-child { color: var(--dark); }
+.about-right {
+  padding: 100px 60px 100px 80px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 48px;
+}
+.about-stat { border-left: 1px solid var(--line); padding-left: 24px; }
+.stat-val {
+  font-family: 'Cormorant Garamond', serif;
+  font-weight: 300;
+  font-size: 3.5rem;
+  line-height: 1;
+  color: var(--black);
+  display: block;
+  margin-bottom: 8px;
+}
+.stat-val em { font-style:normal; color:var(--wine); }
+.stat-label {
+  font-family: 'Noto Sans JP', sans-serif;
+  font-weight: 300;
+  font-size: 0.7rem;
+  letter-spacing: 0.15em;
+  color: var(--muted);
+}
+
+/* ── CONTACT (top page minimal) ── */
+.contact-strip {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+.contact-left {
+  padding: 100px 80px 100px 60px;
+  border-right: 1px solid var(--line);
+  background: var(--black);
+}
+.contact-left .sec-title { font-size:clamp(2.2rem,3.5vw,3.5rem); margin-bottom:28px; color:var(--white); }
+.contact-left .sec-title em { color:var(--wine); }
+.contact-left .sec-num { color:rgba(255,255,255,0.25); margin-bottom:16px; display:block; }
+.contact-note {
+  font-size: 0.88rem;
+  line-height: 2.3;
+  color: rgba(255,255,255,0.4);
+  margin-bottom: 48px;
+}
+.contact-meta { display:flex; flex-direction:column; gap:0; }
+.contact-meta li {
+  display: flex;
+  gap: 0;
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+  padding: 15px 0;
+  list-style: none;
+}
+.contact-meta li:first-child { border-top: 1px solid rgba(255,255,255,0.08); }
+.cm-key {
+  font-family: 'Noto Sans JP', sans-serif;
+  font-size: 0.62rem;
+  letter-spacing: 0.15em;
+  color: rgba(255,255,255,0.28);
+  text-transform: uppercase;
+  width: 96px;
+  flex-shrink: 0;
+  padding-top: 2px;
+}
+.cm-val { font-size:0.8rem; line-height:1.9; color:rgba(255,255,255,0.6); }
+.contact-right { padding: 100px 60px 100px 80px; }
+
+@media (max-width:960px) {
+  .hero { grid-template-columns:1fr; }
+  .hero-left { border-right:none; border-bottom:1px solid var(--line); padding:120px 24px 60px; }
+  .hero-eyebrow { left:24px; }
+  .hero-right { padding:60px 24px; }
+  .biz-card { margin:0 -24px; padding-left:24px; padding-right:24px; grid-template-columns:50px 1fr auto; gap:20px; }
+  .about-strip, .contact-strip { grid-template-columns:1fr; }
+  .about-left, .about-right { padding:80px 24px; border:none; border-bottom:1px solid var(--line); }
+  .contact-left, .contact-right { padding:80px 24px; }
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo">株式会社ツルプルン<em>.</em></a>
+  <ul class="nav-links">
+    <li><a href="trading.html">トレカ事業</a></li>
+    <li><a href="systems.html">システム事業</a></li>
+    <li><a href="#about">会社概要</a></li>
+    <li><a href="#contact">お問い合わせ</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-left">
+    <span class="hero-eyebrow">TSURUPURUN CO., LTD.</span>
+    <h1 class="hero-title">
+      カードビジネスの<br>
+      新しい<em>秩序</em>を、<br>
+      池袋から。
+    </h1>
+    <p class="hero-body">
+      トレーディングカード事業とシステム開発の両輪で、カード産業のエコシステムを再構築する。
+    </p>
+    <a href="trading.html" class="btn-text">事業内容を見る <span class="arr">→</span></a>
+  </div>
+  <div class="hero-right">
+    <div class="biz-cards">
+      <a href="trading.html" class="biz-card">
+        <div class="biz-num">01</div>
+        <div class="biz-info">
+          <span class="biz-en">Trading Card Business</span>
+          <span class="biz-name">トレーディングカード事業</span>
+          <span class="biz-desc">ワンピースカード専門店「トレカビンクス」の運営・FC展開・国内EC</span>
+        </div>
+        <span class="biz-arrow">→</span>
+      </a>
+      <a href="systems.html" class="biz-card">
+        <div class="biz-num">02</div>
+        <div class="biz-info">
+          <span class="biz-en">System Development</span>
+          <span class="biz-name">システム開発事業</span>
+          <span class="biz-desc">STARBOY / IMAILUKA / TIMEWIZARD — 3プロダクトを開発・販売</span>
+        </div>
+        <span class="biz-arrow">→</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<div class="about-strip" id="about">
+  <div class="about-left">
+    <div class="reveal">
+      <span class="sec-num" style="display:block; margin-bottom:12px;">About</span>
+      <h2 class="sec-title" style="margin-bottom:36px;">会社<em>概要</em></h2>
+    </div>
+    <p class="about-body reveal">
+      株式会社ツルプルンは、<strong>トレーディングカード事業</strong>と<strong>システム開発事業</strong>の二軸でカードビジネスのエコシステムを再構築する。池袋発、世界へ。
+    </p>
+    <table class="about-table reveal">
+      <tr><td>社名</td><td>株式会社ツルプルン</td></tr>
+      <tr><td>英語名</td><td>TSURUPURUN CO., LTD.</td></tr>
+      <tr><td>事業内容</td><td>トレーディングカードショップ運営・フランチャイズ・システム開発販売</td></tr>
+      <tr><td>所在地</td><td style="color:var(--muted)">— （入力待ち）</td></tr>
+      <tr><td>設立</td><td style="color:var(--muted)">— （入力待ち）</td></tr>
+      <tr><td>資本金</td><td style="color:var(--muted)">— （入力待ち）</td></tr>
+      <tr><td>代表者</td><td style="color:var(--muted)">— （入力待ち）</td></tr>
+    </table>
+  </div>
+  <div class="about-right reveal">
+    <div class="about-stat">
+      <span class="stat-val">2<em>.</em></span>
+      <span class="stat-label">事業領域</span>
+    </div>
+    <div class="about-stat">
+      <span class="stat-val">3<em>+</em></span>
+      <span class="stat-label">システムプロダクト</span>
+    </div>
+    <div class="about-stat">
+      <span class="stat-val">池袋<em>.</em></span>
+      <span class="stat-label">拠点 / 東京</span>
+    </div>
+  </div>
+</div>
+
+<!-- CONTACT -->
+<div class="contact-strip" id="contact">
+  <div class="contact-left">
+    <span class="sec-num">Contact</span>
+    <h2 class="sec-title">お問い<br><em>合わせ</em></h2>
+    <p class="contact-note">法人・企業様専用のお問い合わせフォームです。フランチャイズ加盟・システム導入・事業提携のご相談をお待ちしております。</p>
+    <ul class="contact-meta">
+      <li><span class="cm-key">対象</span><span class="cm-val">法人・企業様専用（BtoB）</span></li>
+      <li><span class="cm-key">相談内容</span><span class="cm-val">フランチャイズ / システム導入 / 提携</span></li>
+      <li><span class="cm-key">返信</span><span class="cm-val">3営業日以内</span></li>
+    </ul>
+  </div>
+  <div class="contact-right">
+    <form class="c-form reveal" onsubmit="hf(event)">
+      <div class="f-row">
+        <div class="field"><label class="f-label">会社名 *</label><input type="text" placeholder="株式会社〇〇" required></div>
+        <div class="field"><label class="f-label">担当者名 *</label><input type="text" placeholder="山田 太郎" required></div>
+      </div>
+      <div class="f-row">
+        <div class="field"><label class="f-label">メールアドレス *</label><input type="email" placeholder="info@example.com" required></div>
+        <div class="field"><label class="f-label">電話番号</label><input type="tel" placeholder="03-0000-0000"></div>
+      </div>
+      <div class="field">
+        <label class="f-label">お問い合わせ種別 *</label>
+        <select required>
+          <option value="" disabled selected>選択してください</option>
+          <option>フランチャイズ加盟（ライセンス型）</option>
+          <option>フランチャイズ加盟（委託型）</option>
+          <option>フランチャイズ加盟（ハイブリット型）</option>
+          <option>STARBOY について</option>
+          <option>IMAILUKA について</option>
+          <option>TIMEWIZARD について</option>
+          <option>その他・事業提携</option>
+        </select>
+      </div>
+      <div class="field"><label class="f-label">お問い合わせ内容 *</label><textarea placeholder="ご要件・ご質問をご記入ください" required></textarea></div>
+      <div class="f-submit">
+        <button type="submit" class="btn-fill">送信する →</button>
+        <p class="btn-note">SSL暗号化通信。<br>個人情報は厳重に管理されます。</p>
+      </div>
+    </form>
+  </div>
+</div>
+
+<footer>
+  <div class="f-logo">株式会社ツルプルン<em>.</em></div>
+  <nav class="f-nav">
+    <a href="trading.html">トレカ事業</a>
+    <a href="systems.html">システム事業</a>
+    <a href="#about">会社概要</a>
+    <a href="#contact">お問い合わせ</a>
+  </nav>
+  <div class="f-copy">© 2024 株式会社ツルプルン<br>All Rights Reserved.</div>
+</footer>
+
+<script>
+const ro = new IntersectionObserver(entries => {
+  entries.forEach((e,i) => { if(e.isIntersecting){ setTimeout(()=>e.target.classList.add('in'),i*80); ro.unobserve(e.target); } });
+},{threshold:0.08});
+document.querySelectorAll('.reveal').forEach(el=>ro.observe(el));
+function hf(e){
+  e.preventDefault();
+  const b=e.target.querySelector('.btn-fill');
+  b.textContent='送信完了 ✓'; b.style.background='#2d5a2d';
+  setTimeout(()=>{ b.textContent='送信する →'; b.style.background=''; e.target.reset(); },4000);
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>システム開発事業 — 株式会社ツルプルン</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Noto+Serif+JP:wght@300;400&family=Noto+Sans+JP:wght@300;400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="common.css">
+<style>
+/* ── PAGE HERO ── */
+.page-hero {
+  padding: 160px 60px 100px;
+  border-bottom: 1px solid var(--line);
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  align-items: end;
+}
+.page-breadcrumb {
+  font-family: 'Noto Sans JP', sans-serif;
+  font-weight: 300;
+  font-size: 0.65rem;
+  letter-spacing: 0.2em;
+  color: var(--muted);
+  margin-bottom: 32px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.page-breadcrumb a { color:var(--muted); text-decoration:none; transition:color 0.2s; }
+.page-breadcrumb a:hover { color:var(--black); }
+.page-breadcrumb span { color:var(--line); }
+.page-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-weight: 300;
+  font-size: clamp(3rem, 6vw, 6.5rem);
+  line-height: 1.0;
+  letter-spacing: -0.01em;
+  color: var(--black);
+}
+.page-title em { font-style:italic; color:var(--wine); }
+.page-hero-desc {
+  font-size: 0.92rem;
+  line-height: 2.3;
+  color: var(--muted);
+  border-left: 1px solid var(--line);
+  padding-left: 32px;
+  align-self: end;
+}
+
+/* ── PRODUCTS ── */
+.products { border-bottom: 1px solid var(--line); }
+
+.product-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  border-bottom: 1px solid var(--line);
+  min-height: 460px;
+}
+.product-row:last-child { border-bottom: none; }
+.product-row.reverse .product-info { order:-1; border-right:1px solid var(--line); border-left:none; }
+.product-row.reverse .product-visual { order:1; }
+
+.product-info {
+  padding: 80px 60px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  border-right: 1px solid var(--line);
+}
+.product-num {
+  font-family: 'Noto Sans JP', sans-serif;
+  font-weight: 300;
+  font-size: 0.62rem;
+  letter-spacing: 0.25em;
+  color: var(--muted);
+  text-transform: uppercase;
+  margin-bottom: 20px;
+}
+.product-name {
+  font-family: 'Cormorant Garamond', serif;
+  font-weight: 600;
+  font-size: clamp(2.5rem, 4vw, 4rem);
+  letter-spacing: 0.04em;
+  line-height: 1;
+  color: var(--black);
+  margin-bottom: 8px;
+}
+.product-kana {
+  font-family: 'Noto Serif JP', serif;
+  font-weight: 300;
+  font-size: 0.9rem;
+  letter-spacing: 0.12em;
+  color: var(--muted);
+  display: block;
+  margin-bottom: 10px;
+}
+.product-category {
+  font-family: 'Noto Sans JP', sans-serif;
+  font-weight: 300;
+  font-size: 0.65rem;
+  letter-spacing: 0.2em;
+  color: var(--muted);
+  text-transform: uppercase;
+  padding-bottom: 28px;
+  margin-bottom: 28px;
+  border-bottom: 1px solid var(--line);
+}
+.product-body {
+  font-size: 0.9rem;
+  line-height: 2.3;
+  color: var(--muted);
+  margin-bottom: 36px;
+}
+
+.product-footer {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  flex-wrap: wrap;
+}
+.status-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  font-family: 'Noto Sans JP', sans-serif;
+  font-size: 0.62rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+}
+.status-badge .dot {
+  width: 5px; height: 5px;
+  border-radius: 50%;
+  background: var(--line);
+}
+.status-badge.live { color:var(--dark); }
+.status-badge.live .dot { background:var(--wine); }
+.status-badge.soon { color:var(--muted); }
+.lp-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-family: 'Noto Sans JP', sans-serif;
+  font-size: 0.68rem;
+  letter-spacing: 0.12em;
+  color: var(--wine);
+  text-decoration: none;
+  border-bottom: 1px solid rgba(139,26,36,0.3);
+  padding-bottom: 1px;
+  transition: opacity 0.2s;
+}
+.lp-link:hover { opacity:0.7; }
+
+.product-visual {
+  background: var(--off);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 12px;
+  position: relative;
+  overflow: hidden;
+}
+.product-visual-bg {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+.product-bg-text {
+  font-family: 'Cormorant Garamond', serif;
+  font-weight: 600;
+  font-size: 12rem;
+  line-height: 1;
+  color: rgba(0,0,0,0.04);
+  letter-spacing: -0.02em;
+  white-space: nowrap;
+  transform: rotate(-12deg);
+  user-select: none;
+}
+.product-visual-content {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+}
+.product-icon {
+  font-family: 'Cormorant Garamond', serif;
+  font-weight: 300;
+  font-size: 4rem;
+  color: var(--dark);
+  letter-spacing: 0.08em;
+  line-height: 1;
+  display: block;
+  margin-bottom: 16px;
+}
+.product-visual-name {
+  font-family: 'Noto Sans JP', sans-serif;
+  font-weight: 300;
+  font-size: 0.62rem;
+  letter-spacing: 0.25em;
+  color: var(--muted);
+  text-transform: uppercase;
+}
+
+/* ── CONTACT CTA ── */
+.cta-strip {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  border-bottom: 1px solid var(--line);
+}
+.cta-left {
+  padding: 100px 80px 100px 60px;
+  border-right: 1px solid var(--line);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.cta-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-weight: 300;
+  font-size: clamp(2rem, 3.5vw, 3.5rem);
+  line-height: 1.15;
+  color: var(--black);
+  margin-bottom: 28px;
+}
+.cta-title em { font-style:italic; color:var(--wine); }
+.cta-body {
+  font-size: 0.9rem;
+  line-height: 2.3;
+  color: var(--muted);
+  margin-bottom: 40px;
+}
+.cta-right {
+  padding: 100px 60px 100px 80px;
+  background: var(--off);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 0;
+}
+.cta-list { list-style:none; }
+.cta-list li {
+  display: flex;
+  gap: 0;
+  border-bottom: 1px solid var(--line);
+  padding: 18px 0;
+}
+.cta-list li:first-child { border-top: 1px solid var(--line); }
+.cl-key {
+  font-family: 'Noto Sans JP', sans-serif;
+  font-size: 0.62rem;
+  letter-spacing: 0.15em;
+  color: var(--muted);
+  text-transform: uppercase;
+  width: 100px;
+  flex-shrink: 0;
+  padding-top: 2px;
+}
+.cl-val { font-size:0.82rem; line-height:1.9; color:var(--dark); }
+
+@media (max-width:960px) {
+  .page-hero { grid-template-columns:1fr; padding:120px 24px 60px; gap:32px; }
+  .product-row { grid-template-columns:1fr; min-height:auto; }
+  .product-row.reverse .product-info { order:1; border-right:none; }
+  .product-row.reverse .product-visual { order:2; }
+  .product-info { border-right:none; border-bottom:1px solid var(--line); padding:60px 24px; }
+  .product-visual { min-height:240px; }
+  .cta-strip { grid-template-columns:1fr; }
+  .cta-left, .cta-right { padding:80px 24px; border:none; border-bottom:1px solid var(--line); }
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo">株式会社ツルプルン<em>.</em></a>
+  <ul class="nav-links">
+    <li><a href="trading.html">トレカ事業</a></li>
+    <li><a href="systems.html" class="active">システム事業</a></li>
+    <li><a href="index.html#about">会社概要</a></li>
+    <li><a href="index.html#contact">お問い合わせ</a></li>
+  </ul>
+</nav>
+
+<!-- PAGE HERO -->
+<div class="page-hero">
+  <div>
+    <div class="page-breadcrumb">
+      <a href="index.html">Home</a>
+      <span>/</span>
+      <span>System Development</span>
+    </div>
+    <h1 class="page-title">
+      システム<br>
+      <em>開発事業</em>
+    </h1>
+  </div>
+  <p class="page-hero-desc">
+    カードビジネスの現場から生まれた3つのプロダクト。トレカショップ管理・受注管理・AI時間割生成で、業務の非効率を根底から解決する。
+  </p>
+</div>
+
+<!-- PRODUCTS -->
+<div class="products">
+
+  <!-- STARBOY -->
+  <div class="product-row reveal">
+    <div class="product-info">
+      <div class="product-num">SYS — 001 / Trading Card</div>
+      <div class="product-name">STARBOY</div>
+      <span class="product-kana">スターボーイ</span>
+      <div class="product-category">Trading Card Shop Management System</div>
+      <p class="product-body">
+        トレカショップの運営に特化した管理システム。在庫・売上・買取ワークフローをデジタル化し、店舗業務を根底から効率化する。
+      </p>
+      <div class="product-footer">
+        <span class="status-badge soon"><span class="dot"></span>LP 公開準備中</span>
+      </div>
+    </div>
+    <div class="product-visual">
+      <div class="product-visual-bg"><div class="product-bg-text">STAR</div></div>
+      <div class="product-visual-content">
+        <span class="product-icon">★</span>
+        <span class="product-visual-name">STARBOY</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- IMAILUKA -->
+  <div class="product-row reverse reveal">
+    <div class="product-info">
+      <div class="product-num">SYS — 002 / Order Management</div>
+      <div class="product-name">IMAILUKA</div>
+      <span class="product-kana">イマイルカ</span>
+      <div class="product-category">Order Management System</div>
+      <p class="product-body">
+        受注管理に特化したシステム。受注から出荷・請求までのフローを一元管理し、オペレーションコストを大幅に削減する。
+      </p>
+      <div class="product-footer">
+        <span class="status-badge live"><span class="dot"></span>LP 公開中</span>
+        <a href="#" class="lp-link">詳細・料金を見る →</a>
+      </div>
+    </div>
+    <div class="product-visual">
+      <div class="product-visual-bg"><div class="product-bg-text">IMA</div></div>
+      <div class="product-visual-content">
+        <span class="product-icon">◎</span>
+        <span class="product-visual-name">IMAILUKA</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- TIMEWIZARD -->
+  <div class="product-row reveal">
+    <div class="product-info">
+      <div class="product-num">SYS — 003 / Education AI</div>
+      <div class="product-name">TIME<br>WIZARD</div>
+      <span class="product-kana">タイムウィザード</span>
+      <div class="product-category">AI Timetable Generator for Schools &amp; Cram Schools</div>
+      <p class="product-body">
+        学校・学習塾向けのAI時間割作成システム。複雑な制約条件を自動で処理し、最適な時間割を瞬時に生成する。
+      </p>
+      <div class="product-footer">
+        <span class="status-badge soon"><span class="dot"></span>LP 公開準備中</span>
+      </div>
+    </div>
+    <div class="product-visual">
+      <div class="product-visual-bg"><div class="product-bg-text">TIME</div></div>
+      <div class="product-visual-content">
+        <span class="product-icon">⧗</span>
+        <span class="product-visual-name">TIMEWIZARD</span>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- CTA -->
+<div class="cta-strip reveal">
+  <div class="cta-left">
+    <h2 class="cta-title">導入・ご相談は<br><em>お気軽に。</em></h2>
+    <p class="cta-body">
+      各プロダクトの詳細・料金・導入支援についてはお問い合わせフォームよりご連絡ください。担当者より3営業日以内にご返信します。
+    </p>
+    <a href="index.html#contact" class="btn-text">お問い合わせ <span class="arr">→</span></a>
+  </div>
+  <div class="cta-right">
+    <ul class="cta-list">
+      <li><span class="cl-key">対象</span><span class="cl-val">法人・企業様専用（BtoB）</span></li>
+      <li><span class="cl-key">STARBOY</span><span class="cl-val">トレカショップ向け管理システム</span></li>
+      <li><span class="cl-key">IMAILUKA</span><span class="cl-val">受注管理システム — LP 公開中</span></li>
+      <li><span class="cl-key">TIMEWIZARD</span><span class="cl-val">学校・塾向け AI 時間割生成</span></li>
+      <li><span class="cl-key">返信</span><span class="cl-val">3営業日以内</span></li>
+    </ul>
+  </div>
+</div>
+
+<footer>
+  <div class="f-logo">株式会社ツルプルン<em>.</em></div>
+  <nav class="f-nav">
+    <a href="trading.html">トレカ事業</a>
+    <a href="systems.html">システム事業</a>
+    <a href="index.html#about">会社概要</a>
+    <a href="index.html#contact">お問い合わせ</a>
+  </nav>
+  <div class="f-copy">© 2024 株式会社ツルプルン<br>All Rights Reserved.</div>
+</footer>
+
+<script>
+const ro = new IntersectionObserver(entries => {
+  entries.forEach((e,i) => { if(e.isIntersecting){ setTimeout(()=>e.target.classList.add('in'),i*80); ro.unobserve(e.target); } });
+},{threshold:0.08});
+document.querySelectorAll('.reveal').forEach(el=>ro.observe(el));
+</script>
+</body>
+</html>
