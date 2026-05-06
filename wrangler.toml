@@ -2,8 +2,3 @@
 name = "turupurun-site"
 compatibility_date = "2026-04-21"
 pages_build_output_dir = "."
-
-[[send_email]]
-name = "CONTACT_EMAIL"
-destination_address = "info@turupurun.com"
-remote = true
