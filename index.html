@@ -4,382 +4,838 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>株式会社ツルプルン</title>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Noto+Serif+JP:wght@300;400&family=Noto+Sans+JP:wght@300;400&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="common.css">
 <style>
-/* ── HERO ── */
-.hero {
-  min-height: 100vh;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  border-bottom: 1px solid var(--line);
-}
-.hero-left {
-  padding: 160px 80px 100px 60px;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
-  border-right: 1px solid var(--line);
-  position: relative;
-}
-.hero-eyebrow {
-  position: absolute;
-  top: 84px; left: 60px;
-  font-family: 'Noto Sans JP', sans-serif;
-  font-size: 0.68rem;
-  letter-spacing: 0.25em;
-  color: var(--muted);
-}
-.hero-title {
-  font-family: 'Cormorant Garamond', serif;
-  font-weight: 300;
-  font-size: clamp(3.2rem, 5.5vw, 5.5rem);
-  line-height: 1.15;
-  letter-spacing: -0.01em;
-  color: var(--black);
-  margin-bottom: 40px;
-}
-.hero-title em { font-style:italic; color:var(--wine); }
-.hero-body {
-  font-size: 0.9rem;
-  line-height: 2.2;
-  color: var(--muted);
-  max-width: 340px;
-  margin-bottom: 52px;
-}
-.hero-right {
-  padding: 160px 60px 100px 80px;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
-  gap: 0;
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
-/* ── BIZ CARDS ── */
-.biz-cards { display:flex; flex-direction:column; gap:0; }
-.biz-card {
-  padding: 48px 0;
-  border-bottom: 1px solid var(--line);
-  display: grid;
-  grid-template-columns: 80px 1fr auto;
-  gap: 32px;
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: #ffffff;
+  color: #000000;
+  font-family: "Yu Gothic", "Hiragino Kaku Gothic ProN", "Meiryo", sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  border-bottom: 1px solid #d9d9d9;
+  background: #ffffff;
+}
+
+.header-inner {
+  width: min(100%, 1120px);
+  margin: 0 auto;
+  padding: 0 24px;
+  min-height: 72px;
+  display: flex;
   align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+}
+
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+
+.site-logo {
+  color: #000000;
   text-decoration: none;
-  color: inherit;
-  transition: background 0.3s;
-  margin: 0 -60px;
-  padding-left: 80px;
-  padding-right: 60px;
-}
-.biz-card:first-child { border-top: 1px solid var(--line); }
-.biz-card:hover { background: var(--off); }
-.biz-card:hover .biz-arrow { transform: translateX(6px); color: var(--wine); }
-
-.biz-num {
-  font-family: 'Cormorant Garamond', serif;
-  font-weight: 300;
-  font-size: 2rem;
-  color: var(--line);
-  line-height: 1;
-}
-.biz-info {}
-.biz-en {
-  font-family: 'Noto Sans JP', sans-serif;
-  font-weight: 300;
-  font-size: 0.62rem;
-  letter-spacing: 0.2em;
-  color: var(--muted);
-  text-transform: uppercase;
-  display: block;
-  margin-bottom: 6px;
-}
-.biz-name {
-  font-family: 'Cormorant Garamond', serif;
-  font-weight: 600;
-  font-size: 1.5rem;
-  letter-spacing: 0.04em;
-  color: var(--black);
-  display: block;
-  margin-bottom: 8px;
-}
-.biz-desc {
-  font-family: 'Noto Sans JP', sans-serif;
-  font-weight: 300;
-  font-size: 0.72rem;
-  line-height: 1.8;
-  color: var(--muted);
-}
-.biz-arrow {
   font-size: 1.1rem;
-  color: var(--line);
-  transition: transform 0.3s, color 0.3s;
-  flex-shrink: 0;
+  font-weight: 700;
+  line-height: 1.4;
 }
 
-/* ── ABOUT STRIP ── */
-.about-strip {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  border-bottom: 1px solid var(--line);
-}
-.about-left {
-  padding: 100px 80px 100px 60px;
-  border-right: 1px solid var(--line);
-}
-.about-left .sec-title { font-size: clamp(2.2rem,3.5vw,3.5rem); margin-bottom: 36px; }
-.about-body {
-  font-size: 0.9rem;
-  line-height: 2.3;
-  color: var(--muted);
-  margin-bottom: 44px;
-}
-.about-body strong { color: var(--dark); font-weight:400; }
-.about-table { width:100%; border-collapse:collapse; }
-.about-table tr { border-bottom: 1px solid var(--line); }
-.about-table tr:first-child { border-top: 1px solid var(--line); }
-.about-table td { padding:16px 0; font-size:0.82rem; vertical-align:top; line-height:1.8; }
-.about-table td:first-child {
-  font-family: 'Noto Sans JP', sans-serif;
-  font-weight: 300;
-  font-size: 0.65rem;
-  letter-spacing: 0.15em;
-  color: var(--muted);
-  text-transform: uppercase;
-  width: 110px;
-  padding-right: 20px;
-}
-.about-table td:last-child { color: var(--dark); }
-.about-right {
-  padding: 100px 60px 100px 80px;
+.site-nav {
   display: flex;
-  flex-direction: column;
-  justify-content: center;
-  gap: 48px;
-}
-.about-stat { border-left: 1px solid var(--line); padding-left: 24px; }
-.stat-val {
-  font-family: 'Cormorant Garamond', serif;
-  font-weight: 300;
-  font-size: 3.5rem;
-  line-height: 1;
-  color: var(--black);
-  display: block;
-  margin-bottom: 8px;
-}
-.stat-val em { font-style:normal; color:var(--wine); }
-.stat-label {
-  font-family: 'Noto Sans JP', sans-serif;
-  font-weight: 300;
-  font-size: 0.7rem;
-  letter-spacing: 0.15em;
-  color: var(--muted);
+  align-items: center;
+  gap: 28px;
 }
 
-/* ── CONTACT (top page minimal) ── */
-.contact-strip {
+.site-nav a {
+  color: #000000;
+  text-decoration: none;
+  font-size: 0.98rem;
+  line-height: 1.4;
+}
+
+.inline-link {
+  color: #000000;
+  text-decoration: none;
+  border-bottom: 1px solid #bdbdbd;
+  padding-bottom: 1px;
+}
+
+.lang-switch {
+  display: inline-flex;
+  align-items: center;
+  border: 1px solid #d9d9d9;
+  border-radius: 999px;
+  overflow: hidden;
+}
+
+.lang-button {
+  border: none;
+  background: #ffffff;
+  color: #666666;
+  min-width: 52px;
+  min-height: 34px;
+  padding: 0 14px;
+  font: inherit;
+  font-size: 0.84rem;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.lang-button.active {
+  background: #000000;
+  color: #ffffff;
+}
+
+main {
+  width: min(100%, 1120px);
+  margin: 0 auto;
+  padding: 56px 24px 80px;
+}
+
+.section {
+  margin-bottom: 40px;
+  scroll-margin-top: 72px;
+}
+
+.section-title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  line-height: 1.5;
+  margin-bottom: 18px;
+}
+
+.content-block {
+  border-top: 1px solid #d9d9d9;
+}
+
+.row {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 260px 1fr;
+  gap: 32px;
+  padding: 28px 0;
+  border-bottom: 1px solid #d9d9d9;
 }
-.contact-left {
-  padding: 100px 80px 100px 60px;
-  border-right: 1px solid var(--line);
-  background: var(--black);
+
+.row-label {
+  font-size: 1.05rem;
+  font-weight: 700;
+  line-height: 1.8;
 }
-.contact-left .sec-title { font-size:clamp(2.2rem,3.5vw,3.5rem); margin-bottom:28px; color:var(--white); }
-.contact-left .sec-title em { color:var(--wine); }
-.contact-left .sec-num { color:rgba(255,255,255,0.25); margin-bottom:16px; display:block; }
-.contact-note {
-  font-size: 0.88rem;
-  line-height: 2.3;
-  color: rgba(255,255,255,0.4);
-  margin-bottom: 48px;
+
+.row-body {
+  font-size: 1rem;
+  line-height: 2;
 }
-.contact-meta { display:flex; flex-direction:column; gap:0; }
-.contact-meta li {
-  display: flex;
-  gap: 0;
-  border-bottom: 1px solid rgba(255,255,255,0.08);
-  padding: 15px 0;
+
+.row-body ul {
   list-style: none;
 }
-.contact-meta li:first-child { border-top: 1px solid rgba(255,255,255,0.08); }
-.cm-key {
-  font-family: 'Noto Sans JP', sans-serif;
-  font-size: 0.62rem;
-  letter-spacing: 0.15em;
-  color: rgba(255,255,255,0.28);
-  text-transform: uppercase;
-  width: 96px;
-  flex-shrink: 0;
-  padding-top: 2px;
-}
-.cm-val { font-size:0.8rem; line-height:1.9; color:rgba(255,255,255,0.6); }
-.contact-right { padding: 100px 60px 100px 80px; }
 
-@media (max-width:960px) {
-  .hero { grid-template-columns:1fr; }
-  .hero-left { border-right:none; border-bottom:1px solid var(--line); padding:120px 24px 60px; }
-  .hero-eyebrow { left:24px; }
-  .hero-right { padding:60px 24px; }
-  .biz-card { margin:0 -24px; padding-left:24px; padding-right:24px; grid-template-columns:50px 1fr auto; gap:20px; }
-  .about-strip, .contact-strip { grid-template-columns:1fr; }
-  .about-left, .about-right { padding:80px 24px; border:none; border-bottom:1px solid var(--line); }
-  .contact-left, .contact-right { padding:80px 24px; }
+.row-body li + li {
+  margin-top: 10px;
+}
+
+.level-1 > li + li {
+  margin-top: 28px;
+}
+
+.level-2 {
+  margin-top: 8px;
+  padding-left: 24px;
+}
+
+.social-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px 18px;
+  margin-top: 8px;
+  padding-left: 59px;
+  font-size: 0.95rem;
+  line-height: 1.8;
+}
+
+.social-links a {
+  color: #000000;
+  text-decoration: none;
+  border-bottom: 1px solid #bdbdbd;
+  padding-bottom: 1px;
+}
+
+.inline-link::after,
+.social-links a::after {
+  content: "↗";
+  margin-left: 4px;
+  font-size: 0.78em;
+  color: #8a8a8a;
+}
+
+.inline-link:hover,
+.social-links a:hover {
+  border-bottom-color: #000000;
+}
+
+.policy-link {
+  color: #000000;
+  text-decoration: none;
+  border-bottom: 1px solid #bdbdbd;
+  padding-bottom: 1px;
+}
+
+.policy-link:hover {
+  border-bottom-color: #000000;
+}
+
+.level-3 {
+  margin-top: 8px;
+  padding-left: 24px;
+}
+
+.contact-box {
+  border: 1px solid #d9d9d9;
+  padding-bottom: 12px;
+}
+
+#contact.section {
+  margin-bottom: 24px;
+}
+
+.contact-form {
+  border-top: 1px solid #d9d9d9;
+}
+
+.form-item {
+  display: grid;
+  grid-template-columns: 260px 1fr;
+  gap: 32px;
+  border-bottom: 1px solid #d9d9d9;
+}
+
+.form-label {
+  padding: 12px;
+  background: #ffffff;
+  font-size: 1.05rem;
+  font-weight: 700;
+  line-height: 1.8;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.form-field {
+  padding: 12px;
+  background: #ffffff;
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+}
+
+.field-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.choice-group,
+.checkbox-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px 28px;
+}
+
+.choice-group label,
+.checkbox-group label {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 1rem;
+  line-height: 1.8;
+}
+
+.split-inputs {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+  width: 300px;
+  max-width: 100%;
+}
+
+.form-input,
+.form-textarea {
+  width: 100%;
+  border: 1px solid #d9d9d9;
+  background: #ffffff;
+  padding: 14px 16px;
+  font: inherit;
+  color: #000000;
+  outline: none;
+  border-radius: 8px;
+}
+
+.form-input {
+  width: 300px;
+  max-width: 100%;
+  flex: 0 0 auto;
+  padding: 8px 12px;
+}
+
+.form-textarea {
+  min-height: 180px;
+  resize: vertical;
+}
+
+.privacy-text {
+  font-size: 0.96rem;
+  line-height: 1.9;
+}
+
+.form-actions {
+  padding: 6px 12px 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  text-align: center;
+}
+
+.confirm-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 42px;
+  padding: 0 24px;
+  border: 1px solid #000000;
+  background: #ffffff;
+  color: #000000;
+  font: inherit;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.privacy-area {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+  text-align: center;
+}
+
+.required-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 42px;
+  padding: 0 8px;
+  min-height: 24px;
+  background: #d70000;
+  color: #ffffff;
+  font-size: 0.76rem;
+  font-weight: 700;
+  line-height: 1;
+  flex: 0 0 auto;
+  white-space: nowrap;
+  border-radius: 999px;
+}
+
+.company-block .row {
+  padding: 14px 0;
+}
+
+.company-block .row-label,
+.company-block .row-body {
+  line-height: 1.6;
+}
+
+.company-block .level-1 > li + li {
+  margin-top: 4px;
+}
+
+@media (max-width: 720px) {
+  .header-inner {
+    min-height: auto;
+    padding: 18px 16px;
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .site-nav {
+    gap: 18px;
+    flex-wrap: wrap;
+  }
+
+  .header-right {
+    width: 100%;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+
+  main {
+    padding: 40px 16px 64px;
+  }
+
+  .row,
+  .form-item {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+
+  .row {
+    padding: 0;
+  }
+
+  .row-label,
+  .row-body,
+  .form-label,
+  .form-field {
+    padding: 18px 0;
+  }
+
+  .form-label {
+    padding: 10px 12px 0;
+    background: #ffffff;
+  }
+
+  .form-field {
+    padding: 8px 12px 10px;
+  }
+
+  .split-inputs {
+    grid-template-columns: 1fr;
+  }
+
+  .form-actions {
+    padding: 6px 12px 0;
+  }
 }
 </style>
 </head>
 <body>
-
-<nav>
-  <a href="index.html" class="nav-logo">株式会社ツルプルン<em>.</em></a>
-  <ul class="nav-links">
-    <li><a href="trading.html">トレカ事業</a></li>
-    <li><a href="systems.html">システム事業</a></li>
-    <li><a href="#about">会社概要</a></li>
-    <li><a href="#contact">お問い合わせ</a></li>
-  </ul>
-</nav>
-
-<!-- HERO -->
-<section class="hero">
-  <div class="hero-left">
-    <span class="hero-eyebrow">TSURUPURUN CO., LTD.</span>
-    <h1 class="hero-title">
-      カードビジネスの<br>
-      新しい<em>秩序</em>を、<br>
-      池袋から。
-    </h1>
-    <p class="hero-body">
-      トレーディングカード事業とシステム開発の両輪で、カード産業のエコシステムを再構築する。
-    </p>
-    <a href="trading.html" class="btn-text">事業内容を見る <span class="arr">→</span></a>
-  </div>
-  <div class="hero-right">
-    <div class="biz-cards">
-      <a href="trading.html" class="biz-card">
-        <div class="biz-num">01</div>
-        <div class="biz-info">
-          <span class="biz-en">Trading Card Business</span>
-          <span class="biz-name">トレーディングカード事業</span>
-          <span class="biz-desc">ワンピースカード専門店「トレカビンクス」の運営・FC展開・国内EC</span>
+  <header class="site-header">
+    <div class="header-inner">
+      <a href="index.html" class="site-logo" id="site-logo">株式会社ツルプルン</a>
+      <div class="header-right">
+        <nav class="site-nav">
+          <a href="#business" id="nav-business">事業内容</a>
+          <a href="#company" id="nav-company">会社概要</a>
+          <a href="#contact" id="nav-contact">お問合せ</a>
+        </nav>
+        <div class="lang-switch" aria-label="Language switch">
+          <button type="button" class="lang-button active" data-lang="ja">JP</button>
+          <button type="button" class="lang-button" data-lang="en">EN</button>
         </div>
-        <span class="biz-arrow">→</span>
-      </a>
-      <a href="systems.html" class="biz-card">
-        <div class="biz-num">02</div>
-        <div class="biz-info">
-          <span class="biz-en">System Development</span>
-          <span class="biz-name">システム開発事業</span>
-          <span class="biz-desc">STARBOY / IMAILUKA / TIMEWIZARD — 3プロダクトを開発・販売</span>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="section" id="business">
+      <h2 class="section-title" id="section-business-title">事業内容</h2>
+      <div class="content-block">
+        <div class="row">
+          <div class="row-label" id="label-trading">トレーディングカード事業</div>
+          <div class="row-body">
+            <ul class="level-1">
+              <li>
+                <span id="trading-operation">店舗・ECサイト運営</span>
+                <ul class="level-2">
+                  <li>
+                    <span id="trading-store-label">店舗</span>　<a class="inline-link" id="trading-store-link" href="https://maps.app.goo.gl/M1EREfGoAVR6QvmY8" target="_blank" rel="noopener noreferrer">トレカビンクス池袋店</a>
+                    <div class="social-links">
+                      <a href="https://x.com/toreca_binks" target="_blank" rel="noopener noreferrer">X</a>
+                      <a href="https://x.com/toreca_binks" target="_blank" rel="noopener noreferrer">Instagram</a>
+                      <a href="https://www.youtube.com/@torecabinks" target="_blank" rel="noopener noreferrer">YouTube</a>
+                      <a href="https://www.tiktok.com/@tcgbinks" target="_blank" rel="noopener noreferrer">TikTok</a>
+                    </div>
+                  </li>
+                  <li><span id="trading-ec-label">ECサイト</span>　<a class="inline-link" id="trading-ec-link" href="https://torecabinks.ocnk.net/" target="_blank" rel="noopener noreferrer">トレカビンクス</a></li>
+                </ul>
+              </li>
+              <li>
+                <span id="trading-franchise">フランチャイズ事業</span>
+                <ul class="level-2">
+                  <li id="trading-franchise-note">加盟店募集中</li>
+                </ul>
+              </li>
+            </ul>
+          </div>
         </div>
-        <span class="biz-arrow">→</span>
-      </a>
-    </div>
-  </div>
-</section>
 
-<!-- ABOUT -->
-<div class="about-strip" id="about">
-  <div class="about-left">
-    <div class="reveal">
-      <span class="sec-num" style="display:block; margin-bottom:12px;">About</span>
-      <h2 class="sec-title" style="margin-bottom:36px;">会社<em>概要</em></h2>
-    </div>
-    <p class="about-body reveal">
-      株式会社ツルプルンは、<strong>トレーディングカード事業</strong>と<strong>システム開発事業</strong>の二軸でカードビジネスのエコシステムを再構築する。池袋発、世界へ。
-    </p>
-    <table class="about-table reveal">
-      <tr><td>社名</td><td>株式会社ツルプルン</td></tr>
-      <tr><td>英語名</td><td>TSURUPURUN CO., LTD.</td></tr>
-      <tr><td>事業内容</td><td>トレーディングカードショップ運営・フランチャイズ・システム開発販売</td></tr>
-      <tr><td>所在地</td><td style="color:var(--muted)">— （入力待ち）</td></tr>
-      <tr><td>設立</td><td style="color:var(--muted)">— （入力待ち）</td></tr>
-      <tr><td>資本金</td><td style="color:var(--muted)">— （入力待ち）</td></tr>
-      <tr><td>代表者</td><td style="color:var(--muted)">— （入力待ち）</td></tr>
-    </table>
-  </div>
-  <div class="about-right reveal">
-    <div class="about-stat">
-      <span class="stat-val">2<em>.</em></span>
-      <span class="stat-label">事業領域</span>
-    </div>
-    <div class="about-stat">
-      <span class="stat-val">3<em>+</em></span>
-      <span class="stat-label">システムプロダクト</span>
-    </div>
-    <div class="about-stat">
-      <span class="stat-val">池袋<em>.</em></span>
-      <span class="stat-label">拠点 / 東京</span>
-    </div>
-  </div>
-</div>
+        <div class="row">
+          <div class="row-label" id="label-systems">システム開発事業</div>
+          <div class="row-body">
+            <ul class="level-1">
+              <li id="system-masterboy">トレカ専門店運営システム　マスターボーイ</li>
+              <li id="system-imailuka">受注管理システム　イマイルカ</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
 
-<!-- CONTACT -->
-<div class="contact-strip" id="contact">
-  <div class="contact-left">
-    <span class="sec-num">Contact</span>
-    <h2 class="sec-title">お問い<br><em>合わせ</em></h2>
-    <p class="contact-note">法人・企業様専用のお問い合わせフォームです。フランチャイズ加盟・システム導入・事業提携のご相談をお待ちしております。</p>
-    <ul class="contact-meta">
-      <li><span class="cm-key">対象</span><span class="cm-val">法人・企業様専用（BtoB）</span></li>
-      <li><span class="cm-key">相談内容</span><span class="cm-val">フランチャイズ / システム導入 / 提携</span></li>
-      <li><span class="cm-key">返信</span><span class="cm-val">3営業日以内</span></li>
-    </ul>
-  </div>
-  <div class="contact-right">
-    <form class="c-form reveal" onsubmit="hf(event)">
-      <div class="f-row">
-        <div class="field"><label class="f-label">会社名 *</label><input type="text" placeholder="株式会社〇〇" required></div>
-        <div class="field"><label class="f-label">担当者名 *</label><input type="text" placeholder="山田 太郎" required></div>
+    <section class="section" id="company">
+      <h2 class="section-title" id="section-company-title">会社概要</h2>
+      <div class="content-block company-block">
+        <div class="row">
+          <div class="row-label" id="company-name-label">社名</div>
+          <div class="row-body" id="company-name-value">株式会社ツルプルン</div>
+        </div>
+        <div class="row">
+          <div class="row-label" id="company-address-label">所在地</div>
+          <div class="row-body" id="company-address-value">〒170-0013　東京都豊島区東池袋1-23-5新大同ビル４階</div>
+        </div>
+        <div class="row">
+          <div class="row-label" id="company-founded-label">設立</div>
+          <div class="row-body" id="company-founded-value">2024年7月</div>
+        </div>
+        <div class="row">
+          <div class="row-label" id="company-capital-label">資本金</div>
+          <div class="row-body" id="company-capital-value">5,000,000円</div>
+        </div>
+        <div class="row">
+          <div class="row-label" id="company-ceo-label">代表者</div>
+          <div class="row-body" id="company-ceo-value">代表取締役　横山　幹</div>
+        </div>
+        <div class="row">
+          <div class="row-label" id="company-business-label">事業内容</div>
+          <div class="row-body">
+            <ul class="level-1">
+              <li id="company-business-1">■トレーディングカード事業</li>
+              <li id="company-business-2">■システム開発事業</li>
+              <li id="company-business-3">■経営コンサルティング</li>
+            </ul>
+          </div>
+        </div>
       </div>
-      <div class="f-row">
-        <div class="field"><label class="f-label">メールアドレス *</label><input type="email" placeholder="info@example.com" required></div>
-        <div class="field"><label class="f-label">電話番号</label><input type="tel" placeholder="03-0000-0000"></div>
-      </div>
-      <div class="field">
-        <label class="f-label">お問い合わせ種別 *</label>
-        <select required>
-          <option value="" disabled selected>選択してください</option>
-          <option>フランチャイズ加盟（ライセンス型）</option>
-          <option>フランチャイズ加盟（委託型）</option>
-          <option>フランチャイズ加盟（ハイブリット型）</option>
-          <option>STARBOY について</option>
-          <option>IMAILUKA について</option>
-          <option>TIMEWIZARD について</option>
-          <option>その他・事業提携</option>
-        </select>
-      </div>
-      <div class="field"><label class="f-label">お問い合わせ内容 *</label><textarea placeholder="ご要件・ご質問をご記入ください" required></textarea></div>
-      <div class="f-submit">
-        <button type="submit" class="btn-fill">送信する →</button>
-        <p class="btn-note">SSL暗号化通信。<br>個人情報は厳重に管理されます。</p>
-      </div>
-    </form>
-  </div>
-</div>
+    </section>
 
-<footer>
-  <div class="f-logo">株式会社ツルプルン<em>.</em></div>
-  <nav class="f-nav">
-    <a href="trading.html">トレカ事業</a>
-    <a href="systems.html">システム事業</a>
-    <a href="#about">会社概要</a>
-    <a href="#contact">お問い合わせ</a>
-  </nav>
-  <div class="f-copy">© 2024 株式会社ツルプルン<br>All Rights Reserved.</div>
-</footer>
+    <section class="section" id="contact">
+      <h2 class="section-title" id="section-contact-title">お問合せ</h2>
+      <div class="contact-box">
+        <form class="contact-form" id="contact-form" action="confirm.html" method="get">
+          <input type="hidden" name="lang" id="form-lang" value="ja">
+          <div class="form-item">
+            <div class="form-label"><span id="label-category">カテゴリ</span> <span class="required-badge" data-required>必須</span></div>
+            <div class="form-field">
+              <div class="choice-group">
+                <label><input type="checkbox" name="category" value="フランチャイズ"> <span id="category-1">フランチャイズ</span></label>
+                <label><input type="checkbox" name="category" value="システム開発"> <span id="category-2">システム開発</span></label>
+                <label><input type="checkbox" name="category" value="業務提携"> <span id="category-3">業務提携</span></label>
+                <label><input type="checkbox" name="category" value="その他"> <span id="category-4">その他</span></label>
+              </div>
+            </div>
+          </div>
 
-<script>
-const ro = new IntersectionObserver(entries => {
-  entries.forEach((e,i) => { if(e.isIntersecting){ setTimeout(()=>e.target.classList.add('in'),i*80); ro.unobserve(e.target); } });
-},{threshold:0.08});
-document.querySelectorAll('.reveal').forEach(el=>ro.observe(el));
-function hf(e){
-  e.preventDefault();
-  const b=e.target.querySelector('.btn-fill');
-  b.textContent='送信完了 ✓'; b.style.background='#2d5a2d';
-  setTimeout(()=>{ b.textContent='送信する →'; b.style.background=''; e.target.reset(); },4000);
-}
-</script>
+          <div class="form-item">
+            <div class="form-label"><span id="label-name">お名前</span> <span class="required-badge" data-required>必須</span></div>
+            <div class="form-field">
+              <div class="split-inputs">
+                <input class="form-input" type="text" name="last_name" placeholder="性" required>
+                <input class="form-input" type="text" name="first_name" placeholder="名" required>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-item">
+            <div class="form-label"><span id="label-company-name">貴社名</span></div>
+            <div class="form-field">
+              <input class="form-input" type="text" name="company_name" placeholder="株式会社ツルプルン">
+            </div>
+          </div>
+
+          <div class="form-item">
+            <div class="form-label"><span id="label-department">部署名</span></div>
+            <div class="form-field">
+              <input class="form-input" type="text" name="department_name" placeholder="通販事業部">
+            </div>
+          </div>
+
+          <div class="form-item">
+            <div class="form-label"><span id="label-phone">電話番号</span></div>
+            <div class="form-field">
+              <input class="form-input" type="tel" name="phone_number" placeholder="03-1234-5678">
+            </div>
+          </div>
+
+          <div class="form-item">
+            <div class="form-label"><span id="label-website">ウェブサイト</span></div>
+            <div class="form-field">
+              <input class="form-input" type="url" name="website" placeholder="https://turupurun.com">
+            </div>
+          </div>
+
+          <div class="form-item">
+            <div class="form-label"><span id="label-email">Email</span> <span class="required-badge" data-required>必須</span></div>
+            <div class="form-field">
+              <input class="form-input" type="email" name="email" id="email" placeholder="abcd1234@fmail.com" required>
+            </div>
+          </div>
+
+          <div class="form-item">
+            <div class="form-label"><span id="label-email-confirm">Email（確認用）</span> <span class="required-badge" data-required>必須</span></div>
+            <div class="form-field">
+              <input class="form-input" type="email" name="email_confirm" id="email-confirm" required>
+            </div>
+          </div>
+
+          <div class="form-item">
+            <div class="form-label"><span id="label-message">お問合せ内容</span> <span class="required-badge" data-required>必須</span></div>
+            <div class="form-field">
+              <textarea class="form-textarea" name="message" required></textarea>
+            </div>
+          </div>
+
+          <div class="form-actions">
+            <div class="privacy-area">
+              <p class="privacy-text" id="privacy-text">必ず<a class="policy-link" href="privacy.html" target="_blank" rel="noopener noreferrer">プライバシーポリシー</a>をお読みいただき、同意の上送信してください。</p>
+              <div class="checkbox-group">
+                <label><input type="checkbox" id="privacy-check" required> <span id="privacy-agree">プライバシーに同意します</span></label>
+              </div>
+            </div>
+            <button type="submit" class="confirm-button" id="confirm-button">入力内容の確認</button>
+          </div>
+        </form>
+      </div>
+    </section>
+  </main>
 </body>
+<script>
+if ("scrollRestoration" in history) {
+  history.scrollRestoration = "manual";
+}
+
+window.addEventListener("load", () => {
+  window.scrollTo(0, 0);
+});
+
+const contactForm = document.getElementById("contact-form");
+const langButtons = document.querySelectorAll(".lang-button");
+const formLang = document.getElementById("form-lang");
+let currentLang = "ja";
+
+const translations = {
+  ja: {
+    title: "株式会社ツルプルン",
+    navBusiness: "事業内容",
+    navCompany: "会社概要",
+    navContact: "お問合せ",
+    sectionBusinessTitle: "事業内容",
+    labelTrading: "トレーディングカード事業",
+    tradingOperation: "店舗・ECサイト運営",
+    tradingStoreLabel: "店舗",
+    tradingStoreLink: "トレカビンクス池袋店",
+    tradingEcLabel: "ECサイト",
+    tradingEcLink: "トレカビンクス",
+    tradingFranchise: "フランチャイズ事業",
+    tradingFranchiseNote: "加盟店募集中",
+    labelSystems: "システム開発事業",
+    systemMasterboy: "トレカ専門店運営システム　マスターボーイ",
+    systemImailuka: "受注管理システム　イマイルカ",
+    sectionCompanyTitle: "会社概要",
+    companyNameLabel: "社名",
+    companyNameValue: "株式会社ツルプルン",
+    companyAddressLabel: "所在地",
+    companyAddressValue: "〒170-0013　東京都豊島区東池袋1-23-5新大同ビル４階",
+    companyFoundedLabel: "設立",
+    companyFoundedValue: "2024年7月",
+    companyCapitalLabel: "資本金",
+    companyCapitalValue: "5,000,000円",
+    companyCeoLabel: "代表者",
+    companyCeoValue: "代表取締役　横山　幹",
+    companyBusinessLabel: "事業内容",
+    companyBusiness1: "■トレーディングカード事業",
+    companyBusiness2: "■システム開発事業",
+    companyBusiness3: "■経営コンサルティング",
+    sectionContactTitle: "お問合せ",
+    labelCategory: "カテゴリ",
+    category1: "フランチャイズ",
+    category2: "システム開発",
+    category3: "業務提携",
+    category4: "その他",
+    labelName: "お名前",
+    labelCompanyName: "貴社名",
+    labelDepartment: "部署名",
+    labelPhone: "電話番号",
+    labelWebsite: "ウェブサイト",
+    labelEmail: "Email",
+    labelEmailConfirm: "Email（確認用）",
+    labelMessage: "お問合せ内容",
+    privacyText: '必ず<a class="policy-link" href="privacy.html" target="_blank" rel="noopener noreferrer">プライバシーポリシー</a>をお読みいただき、同意の上送信してください。',
+    privacyAgree: "プライバシーに同意します",
+    confirmButton: "入力内容の確認",
+    required: "必須",
+    alertCategory: "カテゴリを選択してください。",
+    alertEmail: "Email と Email（確認用）が一致していません。"
+  },
+  en: {
+    title: "K.K. TURUPURUN",
+    navBusiness: "Business",
+    navCompany: "Company Profile",
+    navContact: "Contact",
+    sectionBusinessTitle: "Business",
+    labelTrading: "Trading Card Business",
+    tradingOperation: "Store and E-commerce Operations",
+    tradingStoreLabel: "Store",
+    tradingStoreLink: "Toreca Binks Ikebukuro",
+    tradingEcLabel: "E-commerce",
+    tradingEcLink: "Toreca Binks",
+    tradingFranchise: "Franchise Business",
+    tradingFranchiseNote: "Now Recruiting Franchise Partners",
+    labelSystems: "System Development Business",
+    systemMasterboy: "Trading Card Store Management System  Master Boy",
+    systemImailuka: "Order Management System  iMailuka",
+    sectionCompanyTitle: "Company Profile",
+    companyNameLabel: "Company Name",
+    companyNameValue: "K.K. TURUPURUN",
+    companyAddressLabel: "Address",
+    companyAddressValue: "4th Floor, Shin-Daido Building, 1-23-5 Higashi-Ikebukuro, Toshima-ku, Tokyo 170-0013, Japan",
+    companyFoundedLabel: "Established",
+    companyFoundedValue: "July 2024",
+    companyCapitalLabel: "Capital",
+    companyCapitalValue: "5,000,000 JPY",
+    companyCeoLabel: "Representative",
+    companyCeoValue: "TSUYOSHI YOKOYAMA",
+    companyBusinessLabel: "Business",
+    companyBusiness1: "■Trading Card Business",
+    companyBusiness2: "■System Development Business",
+    companyBusiness3: "■Management Consulting",
+    sectionContactTitle: "Contact",
+    labelCategory: "Category",
+    category1: "Franchise",
+    category2: "System Development",
+    category3: "Business Alliance",
+    category4: "Other",
+    labelName: "Name",
+    labelCompanyName: "Company",
+    labelDepartment: "Department",
+    labelPhone: "Phone Number",
+    labelWebsite: "Website",
+    labelEmail: "Email",
+    labelEmailConfirm: "Email (Confirmation)",
+    labelMessage: "Inquiry Details",
+    privacyText: 'Please read the <a class="policy-link" href="privacy.html?lang=en" target="_blank" rel="noopener noreferrer">privacy policy</a> carefully and agree before submitting.',
+    privacyAgree: "I agree to the privacy policy",
+    confirmButton: "Review Your Input",
+    required: "Required",
+    alertCategory: "Please select a category.",
+    alertEmail: "Email and Email (Confirmation) do not match."
+  }
+};
+
+const setText = (id, value) => {
+  const element = document.getElementById(id);
+  if (element) element.textContent = value;
+};
+
+function applyLanguage(lang) {
+  currentLang = lang;
+  const t = translations[lang];
+  document.documentElement.lang = lang;
+  document.title = t.title;
+  formLang.value = lang;
+  const logo = document.getElementById("site-logo");
+  logo.href = lang === "en" ? "index.html?lang=en" : "index.html";
+
+  setText("site-logo", t.title);
+  setText("nav-business", t.navBusiness);
+  setText("nav-company", t.navCompany);
+  setText("nav-contact", t.navContact);
+  setText("section-business-title", t.sectionBusinessTitle);
+  setText("label-trading", t.labelTrading);
+  setText("trading-operation", t.tradingOperation);
+  setText("trading-store-label", t.tradingStoreLabel);
+  setText("trading-store-link", t.tradingStoreLink);
+  setText("trading-ec-label", t.tradingEcLabel);
+  setText("trading-ec-link", t.tradingEcLink);
+  setText("trading-franchise", t.tradingFranchise);
+  setText("trading-franchise-note", t.tradingFranchiseNote);
+  setText("label-systems", t.labelSystems);
+  setText("system-masterboy", t.systemMasterboy);
+  setText("system-imailuka", t.systemImailuka);
+  setText("section-company-title", t.sectionCompanyTitle);
+  setText("company-name-label", t.companyNameLabel);
+  setText("company-name-value", t.companyNameValue);
+  setText("company-address-label", t.companyAddressLabel);
+  setText("company-address-value", t.companyAddressValue);
+  setText("company-founded-label", t.companyFoundedLabel);
+  setText("company-founded-value", t.companyFoundedValue);
+  setText("company-capital-label", t.companyCapitalLabel);
+  setText("company-capital-value", t.companyCapitalValue);
+  setText("company-ceo-label", t.companyCeoLabel);
+  setText("company-ceo-value", t.companyCeoValue);
+  setText("company-business-label", t.companyBusinessLabel);
+  setText("company-business-1", t.companyBusiness1);
+  setText("company-business-2", t.companyBusiness2);
+  setText("company-business-3", t.companyBusiness3);
+  setText("section-contact-title", t.sectionContactTitle);
+  setText("label-category", t.labelCategory);
+  setText("category-1", t.category1);
+  setText("category-2", t.category2);
+  setText("category-3", t.category3);
+  setText("category-4", t.category4);
+  setText("label-name", t.labelName);
+  setText("label-company-name", t.labelCompanyName);
+  setText("label-department", t.labelDepartment);
+  setText("label-phone", t.labelPhone);
+  setText("label-website", t.labelWebsite);
+  setText("label-email", t.labelEmail);
+  setText("label-email-confirm", t.labelEmailConfirm);
+  setText("label-message", t.labelMessage);
+  document.getElementById("privacy-text").innerHTML = t.privacyText;
+  setText("privacy-agree", t.privacyAgree);
+  setText("confirm-button", t.confirmButton);
+  document.querySelectorAll("[data-required]").forEach((badge) => {
+    badge.textContent = t.required;
+  });
+
+  langButtons.forEach((button) => {
+    button.classList.toggle("active", button.dataset.lang === lang);
+  });
+
+  const nextUrl = lang === "en" ? "?lang=en" : window.location.pathname;
+  history.replaceState(null, "", nextUrl);
+}
+
+langButtons.forEach((button) => {
+  button.addEventListener("click", () => applyLanguage(button.dataset.lang));
+});
+
+const initialLang = new URLSearchParams(window.location.search).get("lang") === "en" ? "en" : "ja";
+applyLanguage(initialLang);
+
+contactForm.addEventListener("submit", (event) => {
+  const checkedCategories = document.querySelectorAll('input[name="category"]:checked');
+  const email = document.getElementById("email").value.trim();
+  const emailConfirm = document.getElementById("email-confirm").value.trim();
+
+  if (checkedCategories.length === 0) {
+    event.preventDefault();
+    alert(translations[currentLang].alertCategory);
+    return;
+  }
+
+  if (email !== emailConfirm) {
+    event.preventDefault();
+    alert(translations[currentLang].alertEmail);
+  }
+});
+</script>
 </html>

@@ -1,0 +1,1112 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>イマイルカ — オールインワン受発注管理システム</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700&family=Noto+Serif+JP:wght@300;400&display=swap" rel="stylesheet">
+<style>
+:root {
+  --blue-light: #E8F1FA;
+  --orange:     #F07E10;
+  --orange-dk:  #C96700;
+  --navy:       #1A3A5C;
+  --dark:       #111827;
+  --text:       #374151;
+  --muted:      #6B7280;
+  --gray-bg:    #F3F6F9;
+  --white:      #FFFFFF;
+  --line:       #E5E7EB;
+  --peach:      #FFD9CA;
+}
+
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; font-size: 16px; }
+body {
+  font-family: 'Noto Sans JP', sans-serif;
+  color: var(--dark);
+  background: var(--white);
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+/* ── NAV ── */
+.ima-nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 100;
+  background: rgba(255,255,255,0.97);
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid var(--line);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 48px;
+  height: 60px;
+}
+.ima-logo {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--dark);
+  text-decoration: none;
+  letter-spacing: 0.02em;
+}
+.ima-logo span { color: var(--orange); }
+.ima-nav-cta {
+  background: var(--orange);
+  color: var(--white);
+  font-size: 0.78rem;
+  font-weight: 500;
+  padding: 9px 22px;
+  border-radius: 4px;
+  text-decoration: none;
+  transition: background 0.2s;
+}
+.ima-nav-cta:hover { background: var(--orange-dk); }
+
+/* ── HERO ── */
+.ima-hero {
+  background: var(--blue-light);
+  padding: 120px 80px 80px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 60px;
+  align-items: center;
+  min-height: 100vh;
+}
+.hero-tags {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+  margin-bottom: 22px;
+  flex-wrap: wrap;
+}
+.hero-tag {
+  font-size: 0.7rem;
+  font-weight: 500;
+  color: var(--navy);
+  background: rgba(26,58,92,0.09);
+  padding: 3px 11px;
+  border-radius: 100px;
+}
+.hero-dot { color: var(--muted); font-size: 0.5rem; }
+.hero-title {
+  font-size: clamp(2rem, 3.8vw, 3rem);
+  font-weight: 700;
+  line-height: 1.45;
+  color: var(--dark);
+  margin-bottom: 20px;
+  letter-spacing: -0.01em;
+}
+.hero-body {
+  font-size: 0.88rem;
+  line-height: 2;
+  color: var(--text);
+  margin-bottom: 36px;
+  max-width: 420px;
+}
+.ima-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--orange);
+  color: var(--white);
+  font-size: 0.88rem;
+  font-weight: 500;
+  padding: 13px 30px;
+  border-radius: 6px;
+  text-decoration: none;
+  transition: background 0.2s;
+}
+.ima-btn:hover { background: var(--orange-dk); }
+
+/* ── SCREEN MOCKUP ── */
+.screen-mock {
+  background: var(--white);
+  border-radius: 12px;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.12);
+  width: 100%;
+  aspect-ratio: 16/10;
+  overflow: hidden;
+}
+.screen-bar {
+  height: 26px;
+  background: #f1f3f5;
+  border-bottom: 1px solid var(--line);
+  display: flex;
+  align-items: center;
+  padding: 0 10px;
+  gap: 5px;
+}
+.sdot { width: 7px; height: 7px; border-radius: 50%; }
+.sdot:nth-child(1) { background: #FF5F57; }
+.sdot:nth-child(2) { background: #FFBD2E; }
+.sdot:nth-child(3) { background: #28C840; }
+.screen-inner {
+  height: calc(100% - 26px);
+  background: linear-gradient(135deg, #f4f9ff 0%, #e8f1fa 100%);
+  padding: 14px;
+  display: grid;
+  grid-template-columns: 110px 1fr;
+  gap: 10px;
+}
+.s-sidebar {
+  background: var(--navy);
+  border-radius: 6px;
+  padding: 10px 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.s-sb-item {
+  height: 9px;
+  background: rgba(255,255,255,0.15);
+  border-radius: 3px;
+}
+.s-sb-item.act { background: rgba(255,255,255,0.45); }
+.s-main { display: flex; flex-direction: column; gap: 8px; }
+.s-cards {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 6px;
+}
+.s-card {
+  background: var(--white);
+  border-radius: 5px;
+  padding: 8px;
+  box-shadow: 0 1px 6px rgba(0,0,0,0.06);
+}
+.s-card-lbl { height: 5px; background: var(--line); border-radius: 2px; margin-bottom: 5px; width: 55%; }
+.s-card-val { height: 13px; background: var(--navy); border-radius: 2px; }
+.s-chart {
+  flex: 1;
+  background: var(--white);
+  border-radius: 5px;
+  padding: 8px 8px 10px;
+  box-shadow: 0 1px 6px rgba(0,0,0,0.06);
+  display: flex;
+  align-items: flex-end;
+  gap: 4px;
+}
+.s-bar {
+  flex: 1;
+  background: #4a90e2;
+  border-radius: 2px 2px 0 0;
+  opacity: 0.65;
+}
+
+/* ── SECTION SHARED ── */
+.section-label {
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.15em;
+  color: var(--orange);
+  text-transform: uppercase;
+  margin-bottom: 14px;
+}
+.ima-h2 {
+  font-size: clamp(1.5rem, 2.8vw, 2.1rem);
+  font-weight: 700;
+  line-height: 1.5;
+  color: var(--dark);
+  margin-bottom: 18px;
+}
+.ima-body {
+  font-size: 0.87rem;
+  line-height: 2;
+  color: var(--text);
+}
+.section-center {
+  text-align: center;
+  padding: 72px 80px 56px;
+}
+.section-center h2 {
+  font-size: clamp(1.4rem, 2.5vw, 1.85rem);
+  font-weight: 700;
+  color: var(--dark);
+}
+
+/* ── ABOUT ── */
+.ima-about {
+  padding: 100px 80px;
+  display: grid;
+  grid-template-columns: 1fr 1.1fr;
+  gap: 80px;
+  align-items: center;
+  border-bottom: 1px solid var(--line);
+}
+.about-screen {
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.08);
+  aspect-ratio: 16/10;
+}
+.about-screen-inner {
+  height: calc(100% - 26px);
+  background: linear-gradient(135deg, #f0f6ff, #e8f1fa);
+  padding: 16px;
+}
+.as-cards {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+  margin-bottom: 10px;
+}
+.as-card {
+  background: white;
+  border-radius: 5px;
+  padding: 8px;
+  box-shadow: 0 1px 6px rgba(0,0,0,0.06);
+}
+.as-lbl { height: 5px; background: var(--line); border-radius: 2px; margin-bottom: 5px; width: 60%; }
+.as-val { height: 13px; border-radius: 2px; }
+.as-rows { display: flex; flex-direction: column; gap: 6px; background:white; border-radius:5px; padding:10px; }
+.as-row { height: 7px; background: var(--line); border-radius: 2px; }
+.as-row.accent { background: #4a90e2; width: 75%; }
+
+/* ── FEATURES ── */
+.ima-features-bg {
+  background: var(--gray-bg);
+  border-top: 1px solid var(--line);
+}
+.ima-feature-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 60px;
+  align-items: center;
+  padding: 70px 80px;
+  border-top: 1px solid var(--line);
+}
+.ima-feature-row:first-child { border-top: none; }
+.ima-feature-row.rev { direction: rtl; }
+.ima-feature-row.rev > * { direction: ltr; }
+.feat-title {
+  font-size: clamp(1.3rem, 2.2vw, 1.65rem);
+  font-weight: 700;
+  line-height: 1.45;
+  color: var(--dark);
+  margin-bottom: 18px;
+}
+.feat-body {
+  font-size: 0.85rem;
+  line-height: 2;
+  color: var(--text);
+  margin-bottom: 22px;
+}
+.feat-list { list-style: none; display: flex; flex-direction: column; gap: 9px; }
+.feat-list li {
+  font-size: 0.82rem;
+  color: var(--text);
+  display: flex;
+  align-items: flex-start;
+  gap: 9px;
+  line-height: 1.6;
+}
+.feat-list li::before {
+  content: '';
+  width: 6px; height: 6px;
+  background: var(--orange);
+  border-radius: 50%;
+  margin-top: 6px;
+  flex-shrink: 0;
+}
+.feat-screen {
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.08);
+  aspect-ratio: 16/10;
+}
+.feat-screen-inner {
+  height: calc(100% - 26px);
+  background: #f4f7fb;
+  padding: 14px;
+  display: grid;
+  grid-template-columns: 90px 1fr;
+  gap: 10px;
+}
+.fs-sidebar {
+  background: var(--navy);
+  border-radius: 5px;
+  padding: 10px 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.fs-sb { height: 8px; background: rgba(255,255,255,0.18); border-radius: 3px; }
+.fs-sb.act { background: rgba(255,255,255,0.5); }
+.fs-main { display: flex; flex-direction: column; gap: 8px; }
+.fs-kpi {
+  display: grid;
+  grid-template-columns: repeat(3,1fr);
+  gap: 6px;
+}
+.fs-kpi-card {
+  background: white;
+  border-radius: 4px;
+  padding: 7px;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+}
+.fs-kpi-lbl { height: 5px; background: var(--line); border-radius: 2px; margin-bottom: 4px; width: 55%; }
+.fs-kpi-val { height: 12px; border-radius: 2px; }
+.fs-chart {
+  flex: 1;
+  background: white;
+  border-radius: 4px;
+  padding: 8px 8px 10px;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+  display: flex;
+  align-items: flex-end;
+  gap: 4px;
+}
+.fs-bar { flex: 1; background: #4a90e2; border-radius: 2px 2px 0 0; opacity: 0.65; }
+.fs-table {
+  flex: 1;
+  background: white;
+  border-radius: 4px;
+  padding: 8px;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+.fs-tr {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1.5fr 0.7fr;
+  gap: 6px;
+  padding-bottom: 5px;
+  border-bottom: 1px solid var(--line);
+}
+.fs-td { height: 5px; background: var(--line); border-radius: 2px; }
+.fs-td.a { background: #4a90e2; width: 50%; }
+.fs-td.b { background: var(--orange); width: 50%; }
+.fs-td.c { background: #22c55e; width: 50%; }
+
+/* ── MID CTA ── */
+.ima-mid-cta {
+  background: var(--blue-light);
+  padding: 100px 80px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 60px;
+  align-items: center;
+  border-top: 1px solid rgba(0,0,0,0.06);
+}
+
+/* ── SYSTEM PAGES ── */
+.ima-system {
+  padding: 80px;
+  background: var(--gray-bg);
+  border-top: 1px solid var(--line);
+}
+.sys-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+.sys-thumb {
+  background: var(--white);
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+  transition: transform 0.25s, box-shadow 0.25s;
+}
+.sys-thumb:hover { transform: translateY(-4px); box-shadow: 0 10px 28px rgba(0,0,0,0.1); }
+.sys-preview {
+  aspect-ratio: 16/10;
+  background: linear-gradient(135deg, #e8f1fa, #d4e8f5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.sys-preview-inner {
+  width: 84%;
+  height: 74%;
+  background: white;
+  border-radius: 4px;
+  padding: 8px 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+.sys-row { height: 6px; background: var(--line); border-radius: 2px; }
+.sys-row.b { background: #4a90e2; width: 55%; }
+.sys-row.s { width: 70%; }
+.sys-label {
+  padding: 11px 14px;
+  font-size: 0.78rem;
+  font-weight: 500;
+  color: var(--text);
+  text-align: center;
+  border-top: 1px solid var(--line);
+}
+
+/* ── HOW TO USE ── */
+.ima-howto {
+  padding: 80px;
+  background: var(--white);
+  border-top: 1px solid var(--line);
+}
+.howto-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 28px;
+  margin-top: 48px;
+}
+.howto-card {
+  padding: 32px;
+  background: var(--gray-bg);
+  border-radius: 12px;
+}
+.howto-num {
+  font-size: 2.6rem;
+  font-weight: 700;
+  color: rgba(26,58,92,0.1);
+  line-height: 1;
+  margin-bottom: 14px;
+}
+.howto-title {
+  font-size: 0.98rem;
+  font-weight: 700;
+  color: var(--dark);
+  margin-bottom: 10px;
+  line-height: 1.4;
+}
+.howto-body {
+  font-size: 0.82rem;
+  line-height: 1.85;
+  color: var(--muted);
+}
+
+/* ── WHY ── */
+.ima-why {
+  padding: 80px;
+  background: var(--blue-light);
+  border-top: 1px solid var(--line);
+  display: grid;
+  grid-template-columns: 1fr 1.6fr;
+  gap: 80px;
+  align-items: center;
+}
+.why-title {
+  font-size: clamp(1.4rem, 2.5vw, 2rem);
+  font-weight: 700;
+  line-height: 1.55;
+  color: var(--dark);
+}
+.why-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 18px;
+}
+.why-card {
+  background: rgba(255,255,255,0.75);
+  border-radius: 12px;
+  padding: 22px;
+  backdrop-filter: blur(4px);
+}
+.why-icon { font-size: 1.5rem; margin-bottom: 10px; display: block; }
+.why-card-title {
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: var(--dark);
+  margin-bottom: 7px;
+  line-height: 1.3;
+}
+.why-card-body {
+  font-size: 0.78rem;
+  line-height: 1.75;
+  color: var(--text);
+}
+
+/* ── DOCUMENTS ── */
+.ima-docs {
+  border-top: 1px solid var(--line);
+  background: var(--white);
+}
+.docs-header {
+  background: var(--peach);
+  padding: 36px 80px;
+  margin-bottom: 48px;
+}
+.docs-header-title {
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: var(--dark);
+  margin-bottom: 4px;
+}
+.docs-header-sub {
+  font-size: 0.78rem;
+  color: var(--text);
+}
+.docs-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 22px;
+  padding: 0 80px 80px;
+}
+.doc-thumb {
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 2px 14px rgba(0,0,0,0.08);
+  transition: transform 0.25s;
+}
+.doc-thumb:hover { transform: translateY(-4px); }
+.doc-preview {
+  aspect-ratio: 3/4;
+  background: linear-gradient(180deg, #f9fafb 0%, #edf0f3 100%);
+  padding: 20px 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+.doc-line { height: 6px; background: var(--line); border-radius: 2px; }
+.doc-line.title { height: 10px; background: var(--dark); width: 44%; margin-bottom: 8px; }
+.doc-line.short { width: 60%; }
+.doc-label {
+  padding: 11px 14px;
+  text-align: center;
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: var(--text);
+  background: var(--white);
+  border-top: 1px solid var(--line);
+}
+
+/* ── FINAL CTA ── */
+.ima-final-cta {
+  background: var(--blue-light);
+  padding: 100px 80px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 60px;
+  align-items: center;
+  border-top: 1px solid rgba(0,0,0,0.06);
+}
+
+/* ── FOOTER ── */
+.ima-footer {
+  background: var(--navy);
+  padding: 36px 80px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+.ima-footer-logo {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--white);
+}
+.ima-footer-nav {
+  display: flex;
+  gap: 24px;
+  list-style: none;
+}
+.ima-footer-nav a {
+  font-size: 0.76rem;
+  color: rgba(255,255,255,0.55);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+.ima-footer-nav a:hover { color: var(--white); }
+.ima-footer-copy {
+  font-size: 0.68rem;
+  color: rgba(255,255,255,0.35);
+  line-height: 1.8;
+}
+
+/* ── REVEAL ── */
+.reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.85s ease, transform 0.85s ease; }
+.reveal.in { opacity: 1; transform: none; }
+
+/* ── RESPONSIVE ── */
+@media (max-width: 960px) {
+  .ima-nav { padding: 0 20px; }
+  .ima-hero,
+  .ima-about,
+  .ima-mid-cta,
+  .ima-why,
+  .ima-final-cta { grid-template-columns: 1fr; padding: 80px 24px; gap: 40px; }
+  .ima-hero { min-height: auto; padding-top: 100px; }
+  .ima-feature-row { grid-template-columns: 1fr; padding: 48px 24px; gap: 32px; }
+  .ima-feature-row.rev { direction: ltr; }
+  .section-center { padding: 56px 24px 40px; }
+  .ima-system, .ima-howto, .ima-docs { padding: 60px 24px; }
+  .docs-header { padding: 28px 24px; }
+  .docs-grid { padding: 0 24px 60px; }
+  .sys-grid, .howto-grid, .docs-grid { grid-template-columns: 1fr 1fr; }
+  .why-grid { grid-template-columns: 1fr; }
+  .ima-footer { padding: 28px 24px; }
+}
+@media (max-width: 600px) {
+  .sys-grid, .docs-grid, .howto-grid { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="ima-nav">
+  <a href="imailuka.html" class="ima-logo">imairu-ka<span>.</span></a>
+  <a href="#contact" class="ima-nav-cta">お問い合わせ</a>
+</nav>
+
+<!-- HERO -->
+<section class="ima-hero">
+  <div>
+    <div class="hero-tags">
+      <span class="hero-tag">受発注</span>
+      <span class="hero-dot">●</span>
+      <span class="hero-tag">加工</span>
+      <span class="hero-dot">●</span>
+      <span class="hero-tag">注文</span>
+      <span class="hero-dot">●</span>
+      <span class="hero-tag">書類管理も</span>
+    </div>
+    <h1 class="hero-title">いますぐイルカの<br>ようにスマートに。</h1>
+    <p class="hero-body">
+      イマイルカは、受注・加工・注文・書類管理のすべてをワンストップで提供するオールインワン受発注管理システムです。チーム全体のコミュニケーションを改善しながら、スムーズな業務フローを実現します。
+    </p>
+    <a href="#contact" class="ima-btn">お問い合わせ →</a>
+  </div>
+  <div>
+    <div class="screen-mock">
+      <div class="screen-bar">
+        <div class="sdot"></div><div class="sdot"></div><div class="sdot"></div>
+      </div>
+      <div class="screen-inner">
+        <div class="s-sidebar">
+          <div class="s-sb-item act"></div>
+          <div class="s-sb-item"></div>
+          <div class="s-sb-item"></div>
+          <div class="s-sb-item"></div>
+          <div class="s-sb-item"></div>
+        </div>
+        <div class="s-main">
+          <div class="s-cards">
+            <div class="s-card"><div class="s-card-lbl"></div><div class="s-card-val"></div></div>
+            <div class="s-card"><div class="s-card-lbl"></div><div class="s-card-val" style="background:var(--orange)"></div></div>
+            <div class="s-card"><div class="s-card-lbl"></div><div class="s-card-val" style="background:#22c55e"></div></div>
+          </div>
+          <div class="s-chart">
+            <div class="s-bar" style="height:38%"></div>
+            <div class="s-bar" style="height:62%"></div>
+            <div class="s-bar" style="height:52%"></div>
+            <div class="s-bar" style="height:78%"></div>
+            <div class="s-bar" style="height:68%"></div>
+            <div class="s-bar" style="height:88%"></div>
+            <div class="s-bar" style="height:74%"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section class="ima-about reveal">
+  <div>
+    <p class="section-label">イマイルカについて</p>
+    <h2 class="ima-h2">オールインワンの受発注管理で、<br>業務効率を最大化。</h2>
+    <p class="ima-body">
+      イマイルカは、受注・加工・注文・書類管理のすべてをワンストップで提供します。複数のツールに分散していた業務を一元化し、チーム間のコミュニケーションを改善しながら、スムーズな受発注フローを実現します。
+    </p>
+  </div>
+  <div class="about-screen">
+    <div class="screen-bar">
+      <div class="sdot"></div><div class="sdot"></div><div class="sdot"></div>
+    </div>
+    <div class="about-screen-inner">
+      <div class="as-cards">
+        <div class="as-card"><div class="as-lbl"></div><div class="as-val" style="background:var(--navy)"></div></div>
+        <div class="as-card"><div class="as-lbl"></div><div class="as-val" style="background:var(--orange)"></div></div>
+        <div class="as-card"><div class="as-lbl"></div><div class="as-val" style="background:#22c55e"></div></div>
+      </div>
+      <div class="as-rows">
+        <div class="as-row accent"></div>
+        <div class="as-row"></div>
+        <div class="as-row" style="width:80%"></div>
+        <div class="as-row" style="width:65%"></div>
+        <div class="as-row"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FEATURES -->
+<div class="ima-features-bg">
+  <div class="section-center">
+    <h2>イマイルカは何ができる？</h2>
+  </div>
+
+  <!-- Feature 1: Dashboard -->
+  <div class="ima-feature-row reveal">
+    <div>
+      <p class="section-label">ダッシュボード</p>
+      <h3 class="feat-title">経営の今を伝える、<br>直感的ダッシュボード</h3>
+      <p class="feat-body">
+        「今日の受注数は？」「今月の売上は？」といった経営判断に必要な情報をリアルタイムで可視化。複数の管理画面を行き来する必要がなくなります。
+      </p>
+      <ul class="feat-list">
+        <li>顧客・受注・売上を一画面で把握できる3つの主要指標</li>
+        <li>顧客の数を見える化する直感的なカード表示</li>
+        <li>選ばれたマーケティングデータを掌握する分析機能</li>
+        <li>選ばれて実行するフォローアップの施策規模を管理</li>
+      </ul>
+    </div>
+    <div class="feat-screen">
+      <div class="screen-bar">
+        <div class="sdot"></div><div class="sdot"></div><div class="sdot"></div>
+      </div>
+      <div class="feat-screen-inner">
+        <div class="fs-sidebar">
+          <div class="fs-sb act"></div>
+          <div class="fs-sb"></div>
+          <div class="fs-sb"></div>
+          <div class="fs-sb"></div>
+        </div>
+        <div class="fs-main">
+          <div class="fs-kpi">
+            <div class="fs-kpi-card"><div class="fs-kpi-lbl"></div><div class="fs-kpi-val" style="background:var(--navy)"></div></div>
+            <div class="fs-kpi-card"><div class="fs-kpi-lbl"></div><div class="fs-kpi-val" style="background:var(--orange)"></div></div>
+            <div class="fs-kpi-card"><div class="fs-kpi-lbl"></div><div class="fs-kpi-val" style="background:#22c55e"></div></div>
+          </div>
+          <div class="fs-chart">
+            <div class="fs-bar" style="height:40%"></div>
+            <div class="fs-bar" style="height:58%"></div>
+            <div class="fs-bar" style="height:48%"></div>
+            <div class="fs-bar" style="height:72%"></div>
+            <div class="fs-bar" style="height:65%"></div>
+            <div class="fs-bar" style="height:88%"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Feature 2: Delivery management -->
+  <div class="ima-feature-row rev reveal">
+    <div>
+      <p class="section-label">届け先管理</p>
+      <h3 class="feat-title">業務の流れをもとに、<br>届け先管理も</h3>
+      <p class="feat-body">
+        イマイルカが管理するのは受注だけではありません。加工先・仕入先・外注先などの複数の届け先を一元管理し、業務フロー全体をスムーズに進行させます。
+      </p>
+      <ul class="feat-list">
+        <li>全届け先へのスムーズなアクセスと検索</li>
+        <li>お客様の情報をわかりやすく一覧で管理</li>
+        <li>フレキシブルに対応した書類データの形式</li>
+        <li>サプライヤーに適した書類管理の仕組み</li>
+      </ul>
+    </div>
+    <div class="feat-screen">
+      <div class="screen-bar">
+        <div class="sdot"></div><div class="sdot"></div><div class="sdot"></div>
+      </div>
+      <div class="feat-screen-inner" style="grid-template-columns:80px 1fr;">
+        <div class="fs-sidebar">
+          <div class="fs-sb act"></div>
+          <div class="fs-sb"></div>
+          <div class="fs-sb"></div>
+          <div class="fs-sb"></div>
+        </div>
+        <div class="fs-main">
+          <div class="fs-table">
+            <div class="fs-tr">
+              <div class="fs-td"></div><div class="fs-td"></div><div class="fs-td"></div><div class="fs-td a"></div>
+            </div>
+            <div class="fs-tr">
+              <div class="fs-td" style="width:70%"></div><div class="fs-td"></div><div class="fs-td" style="width:80%"></div><div class="fs-td b"></div>
+            </div>
+            <div class="fs-tr">
+              <div class="fs-td" style="width:85%"></div><div class="fs-td" style="width:65%"></div><div class="fs-td"></div><div class="fs-td c"></div>
+            </div>
+            <div class="fs-tr" style="border:none">
+              <div class="fs-td" style="width:60%"></div><div class="fs-td" style="width:80%"></div><div class="fs-td" style="width:70%"></div><div class="fs-td a"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- MID CTA -->
+<section class="ima-mid-cta reveal">
+  <div>
+    <h2 class="ima-h2" style="font-size:clamp(1.8rem,3vw,2.5rem)">いますぐイルカの<br>ようにスマートに。</h2>
+    <p class="ima-body" style="margin-bottom:32px">
+      イマイルカは、受注・加工・注文・書類管理のすべてをワンストップで提供するシステムです。業務の効率化をまずはお気軽にご相談ください。
+    </p>
+    <a href="#contact" class="ima-btn">お問い合わせはこちら →</a>
+  </div>
+  <div>
+    <div class="screen-mock">
+      <div class="screen-bar">
+        <div class="sdot"></div><div class="sdot"></div><div class="sdot"></div>
+      </div>
+      <div class="screen-inner">
+        <div class="s-sidebar">
+          <div class="s-sb-item act"></div>
+          <div class="s-sb-item"></div>
+          <div class="s-sb-item"></div>
+          <div class="s-sb-item"></div>
+        </div>
+        <div class="s-main">
+          <div class="s-cards">
+            <div class="s-card"><div class="s-card-lbl"></div><div class="s-card-val"></div></div>
+            <div class="s-card"><div class="s-card-lbl"></div><div class="s-card-val" style="background:var(--orange)"></div></div>
+            <div class="s-card"><div class="s-card-lbl"></div><div class="s-card-val" style="background:#22c55e"></div></div>
+          </div>
+          <div class="s-chart">
+            <div class="s-bar" style="height:48%"></div>
+            <div class="s-bar" style="height:68%"></div>
+            <div class="s-bar" style="height:58%"></div>
+            <div class="s-bar" style="height:82%"></div>
+            <div class="s-bar" style="height:72%"></div>
+            <div class="s-bar" style="height:94%"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SYSTEM PAGES -->
+<section class="ima-system reveal">
+  <div class="section-center" style="padding:0 0 48px">
+    <h2>システムページ</h2>
+  </div>
+  <div class="sys-grid">
+    <div class="sys-thumb">
+      <div class="sys-preview">
+        <div class="sys-preview-inner">
+          <div class="sys-row b"></div>
+          <div class="sys-row"></div>
+          <div class="sys-row s"></div>
+          <div class="sys-row"></div>
+        </div>
+      </div>
+      <div class="sys-label">受発注管理帳票</div>
+    </div>
+    <div class="sys-thumb">
+      <div class="sys-preview">
+        <div class="sys-preview-inner">
+          <div class="sys-row b"></div>
+          <div class="sys-row"></div>
+          <div class="sys-row"></div>
+          <div class="sys-row s"></div>
+        </div>
+      </div>
+      <div class="sys-label">発注管理帳票</div>
+    </div>
+    <div class="sys-thumb">
+      <div class="sys-preview">
+        <div class="sys-preview-inner">
+          <div class="sys-row b"></div>
+          <div class="sys-row s"></div>
+          <div class="sys-row"></div>
+          <div class="sys-row s"></div>
+        </div>
+      </div>
+      <div class="sys-label">外注管理帳票</div>
+    </div>
+    <div class="sys-thumb">
+      <div class="sys-preview">
+        <div class="sys-preview-inner">
+          <div class="sys-row b"></div>
+          <div class="sys-row"></div>
+          <div class="sys-row s"></div>
+          <div class="sys-row"></div>
+        </div>
+      </div>
+      <div class="sys-label">書類管理帳票</div>
+    </div>
+    <div class="sys-thumb">
+      <div class="sys-preview">
+        <div class="sys-preview-inner">
+          <div class="sys-row b"></div>
+          <div class="sys-row"></div>
+          <div class="sys-row"></div>
+          <div class="sys-row s"></div>
+        </div>
+      </div>
+      <div class="sys-label">納品管理帳票</div>
+    </div>
+    <div class="sys-thumb">
+      <div class="sys-preview">
+        <div class="sys-preview-inner">
+          <div class="sys-row b"></div>
+          <div class="sys-row s"></div>
+          <div class="sys-row"></div>
+          <div class="sys-row"></div>
+        </div>
+      </div>
+      <div class="sys-label">販売管理帳票</div>
+    </div>
+  </div>
+</section>
+
+<!-- HOW TO USE -->
+<section class="ima-howto reveal">
+  <div class="section-center" style="padding:0 0 0">
+    <h2>使い方</h2>
+  </div>
+  <div class="howto-grid">
+    <div class="howto-card">
+      <div class="howto-num">01</div>
+      <h3 class="howto-title">初期設定・マスタ登録</h3>
+      <p class="howto-body">会社情報・取引先・商品などのマスタデータを登録します。CSVインポートに対応しており、データ移行も簡単です。</p>
+    </div>
+    <div class="howto-card">
+      <div class="howto-num">02</div>
+      <h3 class="howto-title">受注・発注を入力</h3>
+      <p class="howto-body">受注データを入力するだけで、関連する発注・加工指示・書類が自動生成されます。入力の手間を大幅に削減します。</p>
+    </div>
+    <div class="howto-card">
+      <div class="howto-num">03</div>
+      <h3 class="howto-title">書類発行・進捗管理</h3>
+      <p class="howto-body">見積書・注文書・納品書などの帳票をワンクリックで発行。進捗ステータスをリアルタイムで確認できます。</p>
+    </div>
+  </div>
+</section>
+
+<!-- WHY -->
+<section class="ima-why reveal">
+  <div>
+    <h2 class="why-title">なぜ「イマイルカ」が<br>選ばれるのか？</h2>
+  </div>
+  <div class="why-grid">
+    <div class="why-card">
+      <span class="why-icon">📊</span>
+      <h3 class="why-card-title">業務の一元管理</h3>
+      <p class="why-card-body">受注から出荷・請求まですべてのフローを一つのシステムで管理できます。</p>
+    </div>
+    <div class="why-card">
+      <span class="why-icon">⚡</span>
+      <h3 class="why-card-title">圧倒的な操作性</h3>
+      <p class="why-card-body">直感的なUIで、ITに不慣れな方でも簡単に使いこなせます。</p>
+    </div>
+    <div class="why-card">
+      <span class="why-icon">🔗</span>
+      <h3 class="why-card-title">柔軟な連携機能</h3>
+      <p class="why-card-body">既存のシステムやツールとの連携も柔軟に対応します。</p>
+    </div>
+    <div class="why-card">
+      <span class="why-icon">🛡️</span>
+      <h3 class="why-card-title">安心のサポート体制</h3>
+      <p class="why-card-body">導入から運用まで専任のサポートチームが丁寧にサポートします。</p>
+    </div>
+  </div>
+</section>
+
+<!-- DOCUMENTS -->
+<section class="ima-docs reveal">
+  <div class="docs-header">
+    <h2 class="docs-header-title">各書類サンプル</h2>
+    <p class="docs-header-sub">サンプルについてはこちら</p>
+  </div>
+  <div class="docs-grid">
+    <div class="doc-thumb">
+      <div class="doc-preview">
+        <div class="doc-line title"></div>
+        <div class="doc-line"></div>
+        <div class="doc-line short"></div>
+        <div class="doc-line"></div>
+        <div class="doc-line"></div>
+        <div class="doc-line short"></div>
+        <div class="doc-line"></div>
+      </div>
+      <div class="doc-label">見積書</div>
+    </div>
+    <div class="doc-thumb">
+      <div class="doc-preview">
+        <div class="doc-line title"></div>
+        <div class="doc-line"></div>
+        <div class="doc-line short"></div>
+        <div class="doc-line"></div>
+        <div class="doc-line"></div>
+        <div class="doc-line short"></div>
+        <div class="doc-line"></div>
+      </div>
+      <div class="doc-label">注文書</div>
+    </div>
+    <div class="doc-thumb">
+      <div class="doc-preview">
+        <div class="doc-line title"></div>
+        <div class="doc-line"></div>
+        <div class="doc-line short"></div>
+        <div class="doc-line"></div>
+        <div class="doc-line"></div>
+        <div class="doc-line short"></div>
+        <div class="doc-line"></div>
+      </div>
+      <div class="doc-label">納品書</div>
+    </div>
+  </div>
+</section>
+
+<!-- FINAL CTA -->
+<section class="ima-final-cta reveal" id="contact">
+  <div>
+    <h2 class="ima-h2" style="font-size:clamp(1.8rem,3vw,2.5rem)">いますぐイルカの<br>ようにスマートに。</h2>
+    <p class="ima-body" style="margin-bottom:32px">
+      イマイルカの導入・ご相談はお気軽にお問い合わせください。専任担当者が丁寧にご案内いたします。
+    </p>
+    <a href="index.html#contact" class="ima-btn">お問い合わせはこちら →</a>
+  </div>
+  <div>
+    <div class="screen-mock">
+      <div class="screen-bar">
+        <div class="sdot"></div><div class="sdot"></div><div class="sdot"></div>
+      </div>
+      <div class="screen-inner">
+        <div class="s-sidebar">
+          <div class="s-sb-item act"></div>
+          <div class="s-sb-item"></div>
+          <div class="s-sb-item"></div>
+          <div class="s-sb-item"></div>
+        </div>
+        <div class="s-main">
+          <div class="s-cards">
+            <div class="s-card"><div class="s-card-lbl"></div><div class="s-card-val"></div></div>
+            <div class="s-card"><div class="s-card-lbl"></div><div class="s-card-val" style="background:var(--orange)"></div></div>
+            <div class="s-card"><div class="s-card-lbl"></div><div class="s-card-val" style="background:#22c55e"></div></div>
+          </div>
+          <div class="s-chart">
+            <div class="s-bar" style="height:42%"></div>
+            <div class="s-bar" style="height:64%"></div>
+            <div class="s-bar" style="height:80%"></div>
+            <div class="s-bar" style="height:70%"></div>
+            <div class="s-bar" style="height:94%"></div>
+            <div class="s-bar" style="height:78%"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="ima-footer">
+  <div class="ima-footer-logo">imairu-ka.</div>
+  <ul class="ima-footer-nav">
+    <li><a href="#">機能紹介</a></li>
+    <li><a href="#">システムページ</a></li>
+    <li><a href="#">使い方</a></li>
+    <li><a href="#contact">お問い合わせ</a></li>
+  </ul>
+  <div class="ima-footer-copy">© 2024 株式会社ツルプルン<br>All Rights Reserved.</div>
+</footer>
+
+<script>
+const ro = new IntersectionObserver(entries => {
+  entries.forEach((e, i) => {
+    if (e.isIntersecting) { setTimeout(() => e.target.classList.add('in'), i * 80); ro.unobserve(e.target); }
+  });
+}, { threshold: 0.08 });
+document.querySelectorAll('.reveal').forEach(el => ro.observe(el));
+</script>
+</body>
+</html>

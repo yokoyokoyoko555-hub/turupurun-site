@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>入力内容の確認 | 株式会社ツルプルン</title>
+<style>
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background: #ffffff;
+  color: #000000;
+  font-family: "Yu Gothic", "Hiragino Kaku Gothic ProN", "Meiryo", sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  border-bottom: 1px solid #d9d9d9;
+  background: #ffffff;
+}
+
+.header-inner {
+  width: min(100%, 1120px);
+  margin: 0 auto;
+  padding: 0 24px;
+  min-height: 72px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+}
+
+.site-logo {
+  color: #000000;
+  text-decoration: none;
+  font-size: 1.1rem;
+  font-weight: 700;
+  line-height: 1.4;
+}
+
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.lang-switch {
+  display: inline-flex;
+  align-items: center;
+  border: 1px solid #d9d9d9;
+  border-radius: 999px;
+  overflow: hidden;
+}
+
+.lang-button {
+  border: none;
+  background: #ffffff;
+  color: #666666;
+  min-width: 52px;
+  min-height: 34px;
+  padding: 0 14px;
+  font: inherit;
+  font-size: 0.84rem;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.lang-button.active {
+  background: #000000;
+  color: #ffffff;
+}
+
+main {
+  width: min(100%, 1120px);
+  margin: 0 auto;
+  padding: 40px 24px 80px;
+}
+
+.section-title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  line-height: 1.5;
+  margin-bottom: 18px;
+}
+
+.guide {
+  margin-bottom: 24px;
+  color: #444444;
+  line-height: 1.9;
+}
+
+.confirm-box {
+  border-top: 1px solid #d9d9d9;
+}
+
+.confirm-row {
+  display: grid;
+  grid-template-columns: 260px 1fr;
+  gap: 32px;
+  padding: 18px 0;
+  border-bottom: 1px solid #d9d9d9;
+}
+
+.confirm-label {
+  font-size: 1.05rem;
+  font-weight: 700;
+  line-height: 1.6;
+}
+
+.confirm-value {
+  font-size: 1rem;
+  line-height: 1.9;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+.actions {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  flex-wrap: wrap;
+  margin-top: 32px;
+}
+
+.button-line,
+.button-fill {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 52px;
+  padding: 0 24px;
+  border-radius: 8px;
+  font: inherit;
+  font-weight: 700;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.button-line {
+  border: 1px solid #000000;
+  background: #ffffff;
+  color: #000000;
+}
+
+.button-fill {
+  border: 1px solid #000000;
+  background: #000000;
+  color: #ffffff;
+}
+
+.done-message {
+  display: none;
+  margin-top: 24px;
+  text-align: center;
+  line-height: 1.9;
+}
+
+.error-message {
+  display: none;
+  margin-top: 18px;
+  text-align: center;
+  line-height: 1.9;
+  color: #c40000;
+}
+
+@media (max-width: 720px) {
+  .header-inner,
+  main {
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+
+  .header-inner {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 12px;
+    padding-top: 18px;
+    padding-bottom: 18px;
+    min-height: auto;
+  }
+
+  .confirm-row {
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
+}
+</style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="header-inner">
+      <a href="index.html" class="site-logo" id="site-logo">株式会社ツルプルン</a>
+      <div class="header-right">
+        <div class="lang-switch" aria-label="Language switch">
+          <button type="button" class="lang-button" data-lang="ja">JP</button>
+          <button type="button" class="lang-button" data-lang="en">EN</button>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <h1 class="section-title" id="page-title">入力内容の確認</h1>
+    <p class="guide" id="guide-text">以下の内容でよろしければ送信してください。修正する場合は「戻る」を押してください。</p>
+
+    <div class="confirm-box">
+      <div class="confirm-row">
+        <div class="confirm-label" id="label-category">カテゴリ</div>
+        <div class="confirm-value" id="confirm-category"></div>
+      </div>
+      <div class="confirm-row">
+        <div class="confirm-label" id="label-name">お名前</div>
+        <div class="confirm-value" id="confirm-name"></div>
+      </div>
+      <div class="confirm-row">
+        <div class="confirm-label" id="label-company">貴社名</div>
+        <div class="confirm-value" id="confirm-company"></div>
+      </div>
+      <div class="confirm-row">
+        <div class="confirm-label" id="label-department">部署名</div>
+        <div class="confirm-value" id="confirm-department"></div>
+      </div>
+      <div class="confirm-row">
+        <div class="confirm-label" id="label-phone">電話番号</div>
+        <div class="confirm-value" id="confirm-phone"></div>
+      </div>
+      <div class="confirm-row">
+        <div class="confirm-label" id="label-website">ウェブサイト</div>
+        <div class="confirm-value" id="confirm-website"></div>
+      </div>
+      <div class="confirm-row">
+        <div class="confirm-label" id="label-email">Email</div>
+        <div class="confirm-value" id="confirm-email"></div>
+      </div>
+      <div class="confirm-row">
+        <div class="confirm-label" id="label-message">お問合せ内容</div>
+        <div class="confirm-value" id="confirm-message"></div>
+      </div>
+    </div>
+
+    <div class="actions">
+      <button type="button" class="button-line" id="back-button" onclick="history.back()">戻る</button>
+      <button type="button" class="button-fill" id="send-button">送信する</button>
+    </div>
+
+    <p class="done-message" id="done-message">送信完了しました。<br>内容を確認の上、担当よりご連絡いたします。</p>
+    <p class="error-message" id="error-message"></p>
+  </main>
+
+<script>
+if ("scrollRestoration" in history) {
+  history.scrollRestoration = "manual";
+}
+
+window.addEventListener("load", () => {
+  window.scrollTo(0, 0);
+});
+
+const params = new URLSearchParams(window.location.search);
+const langButtons = document.querySelectorAll(".lang-button");
+let currentLang = params.get("lang") === "en" ? "en" : "ja";
+
+const translations = {
+  ja: {
+    title: "入力内容の確認 | 株式会社ツルプルン",
+    logo: "株式会社ツルプルン",
+    pageTitle: "入力内容の確認",
+    guideText: "以下の内容でよろしければ送信してください。修正する場合は「戻る」を押してください。",
+    labelCategory: "カテゴリ",
+    labelName: "お名前",
+    labelCompany: "貴社名",
+    labelDepartment: "部署名",
+    labelPhone: "電話番号",
+    labelWebsite: "ウェブサイト",
+    labelEmail: "Email",
+    labelMessage: "お問合せ内容",
+    backButton: "戻る",
+    sendButton: "送信する",
+    sentButton: "送信済み",
+    doneMessage: "送信完了しました。<br>内容を確認の上、担当よりご連絡いたします。",
+    sendingButton: "送信中...",
+    empty: "未入力",
+    categoryMap: {
+      "フランチャイズ": "フランチャイズ",
+      "システム開発": "システム開発",
+      "業務提携": "業務提携",
+      "その他": "その他"
+    }
+  },
+  en: {
+    title: "Review Your Input | K.K. TURUPURUN",
+    logo: "K.K. TURUPURUN",
+    pageTitle: "Review Your Input",
+    guideText: "Please review the following details before submitting. Click \"Back\" if you need to make changes.",
+    labelCategory: "Category",
+    labelName: "Name",
+    labelCompany: "Company",
+    labelDepartment: "Department",
+    labelPhone: "Phone Number",
+    labelWebsite: "Website",
+    labelEmail: "Email",
+    labelMessage: "Inquiry Details",
+    backButton: "Back",
+    sendButton: "Submit",
+    sentButton: "Submitted",
+    doneMessage: "Your inquiry has been submitted.<br>We will review the details and contact you shortly.",
+    sendingButton: "Sending...",
+    empty: "Not provided",
+    categoryMap: {
+      "フランチャイズ": "Franchise",
+      "システム開発": "System Development",
+      "業務提携": "Business Alliance",
+      "その他": "Other"
+    }
+  }
+};
+
+const setText = (id, value) => {
+  const element = document.getElementById(id);
+  if (element) element.textContent = value;
+};
+
+function applyLanguage(lang) {
+  currentLang = lang;
+  const t = translations[lang];
+  document.documentElement.lang = lang;
+  document.title = t.title;
+  const logo = document.getElementById("site-logo");
+  logo.href = lang === "en" ? "index.html?lang=en" : "index.html";
+  setText("site-logo", t.logo);
+  setText("page-title", t.pageTitle);
+  setText("guide-text", t.guideText);
+  setText("label-category", t.labelCategory);
+  setText("label-name", t.labelName);
+  setText("label-company", t.labelCompany);
+  setText("label-department", t.labelDepartment);
+  setText("label-phone", t.labelPhone);
+  setText("label-website", t.labelWebsite);
+  setText("label-email", t.labelEmail);
+  setText("label-message", t.labelMessage);
+  setText("back-button", t.backButton);
+  setText("send-button", document.getElementById("send-button").disabled ? t.sentButton : t.sendButton);
+  document.getElementById("done-message").innerHTML = t.doneMessage;
+  document.getElementById("error-message").textContent = "";
+  langButtons.forEach((button) => {
+    button.classList.toggle("active", button.dataset.lang === lang);
+  });
+  fillValues();
+}
+
+langButtons.forEach((button) => {
+  button.addEventListener("click", () => applyLanguage(button.dataset.lang));
+});
+
+const fillText = (id, value) => {
+  const t = translations[currentLang];
+  document.getElementById(id).textContent = value && value.trim() ? value : t.empty;
+};
+
+function fillValues() {
+  const t = translations[currentLang];
+  const categories = params.getAll("category").map((item) => t.categoryMap[item] || item);
+  fillText("confirm-category", categories.length ? categories.join(" / ") : "");
+
+  const lastName = params.get("last_name") || "";
+  const firstName = params.get("first_name") || "";
+  fillText("confirm-name", `${lastName} ${firstName}`.trim());
+  fillText("confirm-company", params.get("company_name") || "");
+  fillText("confirm-department", params.get("department_name") || "");
+  fillText("confirm-phone", params.get("phone_number") || "");
+  fillText("confirm-website", params.get("website") || "");
+  fillText("confirm-email", params.get("email") || "");
+  fillText("confirm-message", params.get("message") || "");
+}
+
+applyLanguage(currentLang);
+
+document.getElementById("send-button").addEventListener("click", () => {
+document.getElementById("send-button").addEventListener("click", async () => {
+  const sendButton = document.getElementById("send-button");
+  const doneMessage = document.getElementById("done-message");
+  const errorMessage = document.getElementById("error-message");
+  const t = translations[currentLang];
+
+  sendButton.disabled = true;
+  sendButton.textContent = t.sendingButton;
+  errorMessage.style.display = "none";
+  doneMessage.style.display = "none";
+
+  const payload = {
+    lang: currentLang,
+    categories: params.getAll("category"),
+    lastName: params.get("last_name") || "",
+    firstName: params.get("first_name") || "",
+    companyName: params.get("company_name") || "",
+    departmentName: params.get("department_name") || "",
+    phoneNumber: params.get("phone_number") || "",
+    website: params.get("website") || "",
+    email: params.get("email") || "",
+    emailConfirm: params.get("email_confirm") || "",
+    message: params.get("message") || "",
+    privacyAgreed: true,
+  };
+
+  try {
+    const response = await fetch("/api/contact", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(payload),
+    });
+
+    const result = await response.json();
+
+    if (!response.ok || !result.ok) {
+      throw new Error(result.message || "Failed to send inquiry.");
+    }
+
+    doneMessage.style.display = "block";
+    sendButton.textContent = t.sentButton;
+  } catch (error) {
+    sendButton.disabled = false;
+    sendButton.textContent = t.sendButton;
+    errorMessage.textContent =
+      error instanceof Error ? error.message : "Failed to send inquiry.";
+    errorMessage.style.display = "block";
+  }
+});
+</script>
+</body>
+</html>
