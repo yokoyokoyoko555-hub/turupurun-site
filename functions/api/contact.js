@@ -1,5 +1,4 @@
 import { EmailMessage } from "cloudflare:email";
-import { createMimeMessage } from "mimetext";
 
 const JSON_HEADERS = {
   "content-type": "application/json; charset=UTF-8",
@@ -124,6 +123,36 @@ function createEmailContent(payload, lang) {
   return { subject, text, html };
 }
 
+function toBase64Utf8(value) {
+  return btoa(unescape(encodeURIComponent(value)));
+}
+
+function createRawMessage({ subject, text, html, from, to }) {
+  const boundary = `boundary_${crypto.randomUUID()}`;
+  return [
+    `From: K.K. TURUPURUN <${from}>`,
+    `To: <${to}>`,
+    `Subject: =?UTF-8?B?${toBase64Utf8(subject)}?=`,
+    "MIME-Version: 1.0",
+    `Content-Type: multipart/alternative; boundary="${boundary}"`,
+    "",
+    `--${boundary}`,
+    'Content-Type: text/plain; charset="UTF-8"',
+    "Content-Transfer-Encoding: 8bit",
+    "",
+    text,
+    "",
+    `--${boundary}`,
+    'Content-Type: text/html; charset="UTF-8"',
+    "Content-Transfer-Encoding: 8bit",
+    "",
+    html,
+    "",
+    `--${boundary}--`,
+    "",
+  ].join("\r\n");
+}
+
 export async function onRequestPost(context) {
   try {
     const payload = await context.request.json();
@@ -144,15 +173,15 @@ export async function onRequestPost(context) {
 
     const { subject, text, html } = createEmailContent(payload, lang);
     const sender = "info@turupurun.com";
+    const rawMessage = createRawMessage({
+      subject,
+      text,
+      html,
+      from: sender,
+      to: "info@turupurun.com",
+    });
 
-    const mime = createMimeMessage();
-    mime.setSender({ name: "K.K. TURUPURUN", addr: sender });
-    mime.setRecipient("info@turupurun.com");
-    mime.setSubject(subject);
-    mime.addMessage({ contentType: "text/plain; charset=UTF-8", data: text });
-    mime.addMessage({ contentType: "text/html; charset=UTF-8", data: html });
-
-    const message = new EmailMessage(sender, "info@turupurun.com", mime.asRaw());
+    const message = new EmailMessage(sender, "info@turupurun.com", rawMessage);
     await context.env.CONTACT_EMAIL.send(message);
 
     return new Response(
