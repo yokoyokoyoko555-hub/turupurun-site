@@ -180,13 +180,15 @@ module.exports = async (req, res) => {
           : "お問い合わせを送信しました。",
     });
   } catch (error) {
+    const detail = error instanceof Error ? error.message : "Unknown error";
+
     return res.status(500).json({
       ok: false,
       message:
         lang === "en"
-          ? "Failed to send inquiry."
-          : "お問い合わせの送信に失敗しました。",
-      error: error instanceof Error ? error.message : "Unknown error",
+          ? detail
+          : `お問い合わせの送信に失敗しました。 ${detail}`,
+      error: detail,
     });
   }
 };

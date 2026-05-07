@@ -452,7 +452,7 @@ document.getElementById("send-button").addEventListener("click", async () => {
     const result = await response.json();
 
     if (!response.ok || !result.ok) {
-      throw new Error(result.message || "Failed to send inquiry.");
+      throw new Error(result.error || result.message || "Failed to send inquiry.");
     }
 
     doneMessage.style.display = "block";
