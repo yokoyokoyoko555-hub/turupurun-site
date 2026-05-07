@@ -1,3 +1,17 @@
 {
-  "cleanUrls": false
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "cleanUrls": false,
+  "redirects": [
+    {
+      "source": "/:path*",
+      "has": [
+        {
+          "type": "host",
+          "value": "turupurun-site.vercel.app"
+        }
+      ],
+      "destination": "https://www.turupurun.com/:path*",
+      "permanent": true
+    }
+  ]
 }
