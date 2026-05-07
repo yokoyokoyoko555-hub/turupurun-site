@@ -629,6 +629,7 @@ window.addEventListener("load", () => {
 const contactForm = document.getElementById("contact-form");
 const langButtons = document.querySelectorAll(".lang-button");
 const formLang = document.getElementById("form-lang");
+const storageKey = "turupurunContactForm";
 let currentLang = "ja";
 
 const translations = {
@@ -835,7 +836,25 @@ contactForm.addEventListener("submit", (event) => {
   if (email !== emailConfirm) {
     event.preventDefault();
     alert(translations[currentLang].alertEmail);
+    return;
   }
+
+  const formData = new FormData(contactForm);
+  const savedData = {
+    lang: currentLang,
+    category: formData.getAll("category"),
+    last_name: formData.get("last_name") || "",
+    first_name: formData.get("first_name") || "",
+    company_name: formData.get("company_name") || "",
+    department_name: formData.get("department_name") || "",
+    phone_number: formData.get("phone_number") || "",
+    website: formData.get("website") || "",
+    email: formData.get("email") || "",
+    email_confirm: formData.get("email_confirm") || "",
+    message: formData.get("message") || "",
+  };
+
+  sessionStorage.setItem(storageKey, JSON.stringify(savedData));
 });
 </script>
 </html>

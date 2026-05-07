@@ -2,15 +2,7 @@
   "name": "turupurun-site",
   "private": true,
   "version": "1.0.0",
-  "scripts": {
-    "deploy": "wrangler pages deploy .",
-    "cf:whoami": "wrangler whoami",
-    "cf:project": "wrangler pages project create turupurun-site"
-  },
-  "devDependencies": {
-    "wrangler": "^4.13.2"
-  },
   "dependencies": {
-    "mimetext": "^3.0.28"
+    "resend": "^6.2.0"
   }
 }

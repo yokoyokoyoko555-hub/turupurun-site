@@ -267,6 +267,7 @@ window.addEventListener("load", () => {
 
 const params = new URLSearchParams(window.location.search);
 const langButtons = document.querySelectorAll(".lang-button");
+const storageKey = "turupurunContactForm";
 let currentLang = params.get("lang") === "en" ? "en" : "ja";
 
 const translations = {
@@ -366,25 +367,53 @@ const fillText = (id, value) => {
   document.getElementById(id).textContent = value && value.trim() ? value : t.empty;
 };
 
+function getStoredFormData() {
+  try {
+    const raw = sessionStorage.getItem(storageKey);
+    return raw ? JSON.parse(raw) : {};
+  } catch {
+    return {};
+  }
+}
+
+function getFieldValue(name, fallback = "") {
+  if (params.has(name)) {
+    return params.get(name) || fallback;
+  }
+
+  const storedData = getStoredFormData();
+  const value = storedData[name];
+  return typeof value === "string" ? value : fallback;
+}
+
+function getCategoryValues() {
+  const fromParams = params.getAll("category");
+  if (fromParams.length > 0) {
+    return fromParams;
+  }
+
+  const storedData = getStoredFormData();
+  return Array.isArray(storedData.category) ? storedData.category : [];
+}
+
 function fillValues() {
   const t = translations[currentLang];
-  const categories = params.getAll("category").map((item) => t.categoryMap[item] || item);
+  const categories = getCategoryValues().map((item) => t.categoryMap[item] || item);
   fillText("confirm-category", categories.length ? categories.join(" / ") : "");
 
-  const lastName = params.get("last_name") || "";
-  const firstName = params.get("first_name") || "";
+  const lastName = getFieldValue("last_name");
+  const firstName = getFieldValue("first_name");
   fillText("confirm-name", `${lastName} ${firstName}`.trim());
-  fillText("confirm-company", params.get("company_name") || "");
-  fillText("confirm-department", params.get("department_name") || "");
-  fillText("confirm-phone", params.get("phone_number") || "");
-  fillText("confirm-website", params.get("website") || "");
-  fillText("confirm-email", params.get("email") || "");
-  fillText("confirm-message", params.get("message") || "");
+  fillText("confirm-company", getFieldValue("company_name"));
+  fillText("confirm-department", getFieldValue("department_name"));
+  fillText("confirm-phone", getFieldValue("phone_number"));
+  fillText("confirm-website", getFieldValue("website"));
+  fillText("confirm-email", getFieldValue("email"));
+  fillText("confirm-message", getFieldValue("message"));
 }
 
 applyLanguage(currentLang);
 
-document.getElementById("send-button").addEventListener("click", () => {
 document.getElementById("send-button").addEventListener("click", async () => {
   const sendButton = document.getElementById("send-button");
   const doneMessage = document.getElementById("done-message");
@@ -398,16 +427,16 @@ document.getElementById("send-button").addEventListener("click", async () => {
 
   const payload = {
     lang: currentLang,
-    categories: params.getAll("category"),
-    lastName: params.get("last_name") || "",
-    firstName: params.get("first_name") || "",
-    companyName: params.get("company_name") || "",
-    departmentName: params.get("department_name") || "",
-    phoneNumber: params.get("phone_number") || "",
-    website: params.get("website") || "",
-    email: params.get("email") || "",
-    emailConfirm: params.get("email_confirm") || "",
-    message: params.get("message") || "",
+    categories: getCategoryValues(),
+    lastName: getFieldValue("last_name"),
+    firstName: getFieldValue("first_name"),
+    companyName: getFieldValue("company_name"),
+    departmentName: getFieldValue("department_name"),
+    phoneNumber: getFieldValue("phone_number"),
+    website: getFieldValue("website"),
+    email: getFieldValue("email"),
+    emailConfirm: getFieldValue("email_confirm"),
+    message: getFieldValue("message"),
     privacyAgreed: true,
   };
 
