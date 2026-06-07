@@ -515,6 +515,10 @@ main {
           <div class="row-body" id="company-ceo-value">代表取締役　横山　幹</div>
         </div>
         <div class="row">
+          <div class="row-label" id="company-license-label">許認可等</div>
+          <div class="row-body" id="company-license-value">東京都公安委員会公認古物商免許（第305542420752号）</div>
+        </div>
+        <div class="row">
           <div class="row-label" id="company-business-label">事業内容</div>
           <div class="row-body">
             <ul class="level-1">
@@ -661,6 +665,8 @@ const translations = {
     companyCapitalValue: "5,000,000円",
     companyCeoLabel: "代表者",
     companyCeoValue: "代表取締役　横山　幹",
+    companyLicenseLabel: "許認可等",
+    companyLicenseValue: "東京都公安委員会公認古物商免許（第305542420752号）",
     companyBusinessLabel: "事業内容",
     companyBusiness1: "■トレーディングカード事業",
     companyBusiness2: "■システム開発事業",
@@ -714,6 +720,8 @@ const translations = {
     companyCapitalValue: "5,000,000 JPY",
     companyCeoLabel: "Representative",
     companyCeoValue: "TSUYOSHI YOKOYAMA",
+    companyLicenseLabel: "Licenses",
+    companyLicenseValue: "Secondhand Dealer License authorized by the Tokyo Metropolitan Public Safety Commission (No. 305542420752)",
     companyBusinessLabel: "Business",
     companyBusiness1: "■Trading Card Business",
     companyBusiness2: "■System Development Business",
@@ -782,6 +790,8 @@ function applyLanguage(lang) {
   setText("company-capital-value", t.companyCapitalValue);
   setText("company-ceo-label", t.companyCeoLabel);
   setText("company-ceo-value", t.companyCeoValue);
+  setText("company-license-label", t.companyLicenseLabel);
+  setText("company-license-value", t.companyLicenseValue);
   setText("company-business-label", t.companyBusinessLabel);
   setText("company-business-1", t.companyBusiness1);
   setText("company-business-2", t.companyBusiness2);
