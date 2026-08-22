@@ -2,7 +2,15 @@
   "name": "turupurun-site",
   "private": true,
   "version": "1.0.0",
+  "scripts": {
+    "start": "node server.js",
+    "check": "node --check server.js && node --check api/contact.js"
+  },
+  "engines": {
+    "node": ">=20"
+  },
   "dependencies": {
+    "express": "^5.2.1",
     "resend": "^6.2.0"
   }
 }
