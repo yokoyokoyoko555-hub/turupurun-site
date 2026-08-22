@@ -6,7 +6,8 @@
     "start": "node server.js",
     "check": "node --check server.js && node --check api/contact.js && node --check scripts/build-cloudflare.js",
     "build:cloudflare:corporate": "node scripts/build-cloudflare.js corporate",
-    "build:cloudflare:franchise": "node scripts/build-cloudflare.js franchise"
+    "build:cloudflare:franchise": "node scripts/build-cloudflare.js franchise",
+    "deploy:cloudflare:franchise": "wrangler deploy --config wrangler.franchise.toml"
   },
   "engines": {
     "node": ">=20"
@@ -14,5 +15,8 @@
   "dependencies": {
     "express": "^5.2.1",
     "resend": "^6.2.0"
+  },
+  "devDependencies": {
+    "wrangler": "4.125.0"
   }
 }
