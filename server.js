@@ -1,19 +1,9 @@
 const express = require("express");
 const path = require("path");
-const contactHandler = require("./api/contact");
 
 const app = express();
 const rootDir = __dirname;
 const port = Number(process.env.PORT) || 3000;
-const publicPages = new Set([
-  "index",
-  "trading",
-  "systems",
-  "privacy",
-  "imailuka",
-  "confirm",
-  "franchise",
-]);
 
 app.set("trust proxy", 1);
 app.disable("x-powered-by");
@@ -25,20 +15,12 @@ app.use((req, res, next) => {
     "Permissions-Policy": "camera=(), microphone=(), geolocation=()",
   });
 
-  if (req.hostname === "www.turupurun.com") {
-    return res.redirect(308, `https://turupurun.com${req.originalUrl}`);
-  }
-
   next();
 });
-
-app.use(express.json({ limit: "100kb" }));
 
 app.get("/health", (_req, res) => {
   res.status(200).json({ ok: true });
 });
-
-app.all("/api/contact", contactHandler);
 
 app.use(
   "/assets",
@@ -53,8 +35,24 @@ app.get("/common.css", (_req, res) => {
   res.sendFile(path.join(rootDir, "common.css"));
 });
 
-app.get(["/robots.txt", "/sitemap.xml"], (req, res) => {
-  res.sendFile(path.join(rootDir, req.path.slice(1)));
+app.get("/robots.txt", (_req, res) => {
+  res
+    .type("text/plain; charset=utf-8")
+    .send(
+      "User-agent: *\nAllow: /\n\nSitemap: https://franchise.torecabinks.com/sitemap.xml\n",
+    );
+});
+
+app.get("/sitemap.xml", (_req, res) => {
+  res.type("application/xml; charset=utf-8").send(
+    '<?xml version="1.0" encoding="UTF-8"?>\n' +
+      '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n' +
+      "  <url>\n" +
+      "    <loc>https://franchise.torecabinks.com/</loc>\n" +
+      "    <priority>1.0</priority>\n" +
+      "  </url>\n" +
+      "</urlset>\n",
+  );
 });
 
 function sendPage(res, pageName) {
@@ -62,29 +60,11 @@ function sendPage(res, pageName) {
   res.sendFile(path.join(rootDir, `${pageName}.html`));
 }
 
-// RailwayではフランチャイズLPをドメイン直下で公開する。
+// このRailwayサービスではフランチャイズLPだけを公開する。
 app.get("/", (_req, res) => sendPage(res, "franchise"));
-
-app.get("/:page", (req, res, next) => {
-  const requestedPage = req.params.page.replace(/\.html$/i, "");
-
-  if (!publicPages.has(requestedPage)) {
-    return next();
-  }
-
-  return sendPage(res, requestedPage);
-});
-
-app.use((error, _req, res, next) => {
-  if (error instanceof SyntaxError && "body" in error) {
-    return res.status(400).json({
-      ok: false,
-      message: "送信内容を読み取れませんでした。",
-    });
-  }
-
-  return next(error);
-});
+app.get(["/franchise", "/franchise.html"], (_req, res) =>
+  sendPage(res, "franchise"),
+);
 
 app.use((_req, res) => {
   res.status(404).type("text/plain; charset=utf-8").send("404 Not Found");
