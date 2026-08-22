@@ -4,7 +4,9 @@
   "version": "1.0.0",
   "scripts": {
     "start": "node server.js",
-    "check": "node --check server.js && node --check api/contact.js"
+    "check": "node --check server.js && node --check api/contact.js && node --check scripts/build-cloudflare.js",
+    "build:cloudflare:corporate": "node scripts/build-cloudflare.js corporate",
+    "build:cloudflare:franchise": "node scripts/build-cloudflare.js franchise"
   },
   "engines": {
     "node": ">=20"
