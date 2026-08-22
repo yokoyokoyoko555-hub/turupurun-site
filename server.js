@@ -62,7 +62,8 @@ function sendPage(res, pageName) {
   res.sendFile(path.join(rootDir, `${pageName}.html`));
 }
 
-app.get("/", (_req, res) => sendPage(res, "index"));
+// RailwayではフランチャイズLPをドメイン直下で公開する。
+app.get("/", (_req, res) => sendPage(res, "franchise"));
 
 app.get("/:page", (req, res, next) => {
   const requestedPage = req.params.page.replace(/\.html$/i, "");
