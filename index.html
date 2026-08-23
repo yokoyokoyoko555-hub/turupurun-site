@@ -649,17 +649,36 @@ const initialParams = new URLSearchParams(window.location.search);
 const contactRequested =
   window.location.hash === "#contact" || initialParams.get("scroll") === "contact";
 
-window.addEventListener("load", () => {
+function scrollToRequestedSection() {
   const anchor = contactRequested ? "#contact" : window.location.hash;
   const target = anchor ? document.querySelector(anchor) : null;
 
   if (target) {
-    target.scrollIntoView({ block: "start" });
+    window.scrollTo({
+      top: Math.max(0, target.getBoundingClientRect().top + window.scrollY),
+      behavior: "auto",
+    });
     if (contactRequested && window.location.hash !== "#contact") {
       history.replaceState(null, "", `${window.location.pathname}#contact`);
     }
   } else {
     window.scrollTo(0, 0);
+  }
+}
+
+window.addEventListener("load", () => {
+  scrollToRequestedSection();
+
+  if (contactRequested) {
+    [100, 400, 1000].forEach((delay) => {
+      window.setTimeout(scrollToRequestedSection, delay);
+    });
+  }
+});
+
+window.addEventListener("pageshow", () => {
+  if (contactRequested) {
+    window.setTimeout(scrollToRequestedSection, 0);
   }
 });
 
