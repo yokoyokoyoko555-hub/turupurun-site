@@ -645,8 +645,22 @@ if ("scrollRestoration" in history) {
   history.scrollRestoration = "manual";
 }
 
+const initialParams = new URLSearchParams(window.location.search);
+const contactRequested =
+  window.location.hash === "#contact" || initialParams.get("scroll") === "contact";
+
 window.addEventListener("load", () => {
-  window.scrollTo(0, 0);
+  const anchor = contactRequested ? "#contact" : window.location.hash;
+  const target = anchor ? document.querySelector(anchor) : null;
+
+  if (target) {
+    target.scrollIntoView({ block: "start" });
+    if (contactRequested && window.location.hash !== "#contact") {
+      history.replaceState(null, "", `${window.location.pathname}#contact`);
+    }
+  } else {
+    window.scrollTo(0, 0);
+  }
 });
 
 const contactForm = document.getElementById("contact-form");
@@ -846,7 +860,9 @@ function applyLanguage(lang) {
     button.classList.toggle("active", button.dataset.lang === lang);
   });
 
-  const nextUrl = lang === "en" ? "?lang=en" : window.location.pathname;
+  const nextUrl = lang === "en"
+    ? `${window.location.pathname}?lang=en${window.location.hash}`
+    : `${window.location.pathname}${contactRequested ? "#contact" : window.location.hash}`;
   history.replaceState(null, "", nextUrl);
 }
 
@@ -854,7 +870,7 @@ langButtons.forEach((button) => {
   button.addEventListener("click", () => applyLanguage(button.dataset.lang));
 });
 
-const initialLang = new URLSearchParams(window.location.search).get("lang") === "en" ? "en" : "ja";
+const initialLang = initialParams.get("lang") === "en" ? "en" : "ja";
 applyLanguage(initialLang);
 
 contactForm.addEventListener("submit", (event) => {
