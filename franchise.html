@@ -491,13 +491,20 @@ a.proof-item:hover { background: var(--off); }
   .overview-mobile-row--stack { grid-template-columns:1fr; }
   .overview-mobile-row--stack .overview-mobile-label { justify-content:flex-start; text-align:left; }
   .overview-mobile-card--common .overview-mobile-row { grid-template-columns:1fr; }
-  .overview-mobile-card--common .overview-mobile-label { padding-bottom:7px; }
-  .overview-mobile-card--common .overview-mobile-value { padding-top:7px; }
-  .fee-campaign { gap:8px; padding:10px 8px; }
-  .fee-before { font-size:1rem; }
-  .fee-campaign-offer { flex-direction:column; gap:1px; align-items:center; }
-  .fee-campaign-offer small { font-size:.62rem; }
-  .fee-campaign-offer strong { font-size:1.15rem; }
+  .overview-mobile-card--common .overview-mobile-label { padding:11px 12px; }
+  .overview-mobile-card--common .overview-mobile-value { padding:12px; }
+  .fee-campaign {
+    width:100%;
+    display:grid;
+    grid-template-columns:minmax(0,1fr) auto minmax(0,1.25fr);
+    gap:8px;
+    padding:12px 10px;
+  }
+  .fee-before { font-size:.875rem; line-height:1.45; }
+  .fee-campaign-arrow { align-self:center; font-size:1rem; }
+  .fee-campaign-offer { flex-direction:column; gap:2px; align-items:center; line-height:1.4; }
+  .fee-campaign-offer small { font-size:.75rem; line-height:1.4; }
+  .fee-campaign-offer strong { font-size:1rem; line-height:1.45; }
 }
 
 /* ── OPERATION MODELS ── */
@@ -1329,6 +1336,11 @@ body { background:var(--fc-paper); color:var(--fc-ink); }
   .diagram-item { min-height:92px; padding:12px 6px; gap:6px; }
   .diagram-item .material-symbols-rounded { font-size:36px; }
   .choice-diagram { width:100%; grid-template-columns:1fr; gap:10px; }
+  .choice-group { padding:14px 10px; }
+  .choice-label { margin-bottom:10px; }
+  .choice-options { grid-template-columns:repeat(2,minmax(0,1fr)); gap:8px; }
+  .choice-option { min-height:96px; padding:10px 4px; font-size:.78rem; }
+  .choice-option .material-symbols-rounded { font-size:34px; }
   .choice-plus { justify-self:center; line-height:1; }
 }
 
@@ -1808,11 +1820,25 @@ h3,
   }
   .overview-mobile-title {
     padding:12px 14px;
+    font-size:1rem;
+    line-height:1.45;
   }
   .overview-mobile-label,
   .overview-mobile-value {
     padding:11px 12px;
+    font-size:.9375rem;
+    line-height:1.6;
   }
+  .overview-mobile-label { font-weight:800; }
+  .overview-mobile-value .overview-row-note {
+    margin-top:6px;
+    font-size:.75rem;
+    line-height:1.65;
+  }
+  .overview-mobile .fee-before { font-size:.875rem; line-height:1.45; }
+  .overview-mobile .fee-campaign-arrow { font-size:1rem; }
+  .overview-mobile .fee-campaign-offer small { font-size:.75rem; line-height:1.4; }
+  .overview-mobile .fee-campaign-offer strong { font-size:1rem; line-height:1.45; }
 
   .op-card {
     padding:30px 18px;
