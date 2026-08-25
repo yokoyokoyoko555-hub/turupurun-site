@@ -6,6 +6,8 @@
 
 ## Core message
 
+カドショの、カドショによる、カドショのためのDXシステム。
+
 カードショップDXを、必要な分だけ。
 
 システムに店舗を合わせるのではなく、店舗にシステムを合わせる。
@@ -34,3 +36,14 @@
 - EC機能搭載
 - すべてトレカDXだけで完結
 - これ一つでカードショップ運営
+
+## Competitive reference
+
+### DMMマイカポス
+
+- Reference: https://myca.cards/pos/
+- Category: カードショップ専用POSレジ
+- Positioning observed on 2026-08-26: 買取・販売・在庫管理をPOSで一括管理し、EC連携・ECモールまで含めた一体型の運用を訴求
+- Primary contrast for Toreca DX: POSの置き換えを前提にせず、既存POSや既存ECを活かしながら必要な業務モジュールだけを選ぶ
+- Do not frame the competitor's integrated model as inherently bad. Present the difference as a choice based on the shop's current systems and required scope.
+- Do not reproduce the competitor's wording, screenshots, customer logos, case-study results, or other assets.
