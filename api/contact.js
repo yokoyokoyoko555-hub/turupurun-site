@@ -3,6 +3,7 @@ const { Resend } = require("resend");
 const categoryLabels = {
   フランチャイズ: "Franchise",
   システム開発: "System Development",
+  トレカDXシステム: "Toreca DX System",
   業務提携: "Business Alliance",
   その他: "Other",
 };

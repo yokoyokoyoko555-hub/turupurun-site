@@ -367,6 +367,16 @@ main {
   margin-top: 4px;
 }
 
+.site-footer {
+  width: min(100%, 1120px);
+  margin: 0 auto;
+  padding: 0 24px 32px;
+  text-align: center;
+  color: #666666;
+  font-size: 0.88rem;
+  line-height: 1.6;
+}
+
 @media (max-width: 720px) {
   .header-inner {
     min-height: auto;
@@ -472,7 +482,9 @@ main {
               <li>
                 <span id="trading-franchise">フランチャイズ事業</span>
                 <ul class="level-2">
-                  <li id="trading-franchise-note">加盟店募集中</li>
+                  <li>
+                    <a class="inline-link" id="trading-franchise-note" href="https://franchise.torecabinks.com/" target="_blank" rel="noopener noreferrer">加盟店募集中</a>
+                  </li>
                 </ul>
               </li>
             </ul>
@@ -483,7 +495,7 @@ main {
           <div class="row-label" id="label-systems">システム開発事業</div>
           <div class="row-body">
             <ul class="level-1">
-              <li id="system-masterboy">トレカ専門店運営システム　マスターボーイ</li>
+              <li id="system-masterboy">トレカDXシステム　マスターボーイ</li>
               <li id="system-imailuka">受注管理システム　イマイルカ</li>
             </ul>
           </div>
@@ -542,8 +554,9 @@ main {
               <div class="choice-group">
                 <label><input type="checkbox" name="category" value="フランチャイズ"> <span id="category-1">フランチャイズ</span></label>
                 <label><input type="checkbox" name="category" value="システム開発"> <span id="category-2">システム開発</span></label>
-                <label><input type="checkbox" name="category" value="業務提携"> <span id="category-3">業務提携</span></label>
-                <label><input type="checkbox" name="category" value="その他"> <span id="category-4">その他</span></label>
+                <label><input type="checkbox" name="category" value="トレカDXシステム"> <span id="category-3">トレカDXシステム</span></label>
+                <label><input type="checkbox" name="category" value="業務提携"> <span id="category-4">業務提携</span></label>
+                <label><input type="checkbox" name="category" value="その他"> <span id="category-5">その他</span></label>
               </div>
             </div>
           </div>
@@ -620,7 +633,7 @@ main {
       </div>
     </section>
   </main>
-</body>
+  <footer class="site-footer">Copyright ©2024-2026 K.K.TURUPURUN</footer>
 <script>
 if ("scrollRestoration" in history) {
   history.scrollRestoration = "manual";
@@ -652,7 +665,7 @@ const translations = {
     tradingFranchise: "フランチャイズ事業",
     tradingFranchiseNote: "加盟店募集中",
     labelSystems: "システム開発事業",
-    systemMasterboy: "トレカ専門店運営システム　マスターボーイ",
+    systemMasterboy: "トレカDXシステム　マスターボーイ",
     systemImailuka: "受注管理システム　イマイルカ",
     sectionCompanyTitle: "会社概要",
     companyNameLabel: "社名",
@@ -675,8 +688,9 @@ const translations = {
     labelCategory: "カテゴリ",
     category1: "フランチャイズ",
     category2: "システム開発",
-    category3: "業務提携",
-    category4: "その他",
+    category3: "トレカDXシステム",
+    category4: "業務提携",
+    category5: "その他",
     labelName: "お名前",
     labelCompanyName: "貴社名",
     labelDepartment: "部署名",
@@ -707,7 +721,7 @@ const translations = {
     tradingFranchise: "Franchise Business",
     tradingFranchiseNote: "Now Recruiting Franchise Partners",
     labelSystems: "System Development Business",
-    systemMasterboy: "Trading Card Store Management System  Master Boy",
+    systemMasterboy: "Toreca DX System  Master Boy",
     systemImailuka: "Order Management System  iMailuka",
     sectionCompanyTitle: "Company",
     companyNameLabel: "Company Name",
@@ -730,8 +744,9 @@ const translations = {
     labelCategory: "Category",
     category1: "Franchise",
     category2: "System Development",
-    category3: "Business Alliance",
-    category4: "Other",
+    category3: "Toreca DX System",
+    category4: "Business Alliance",
+    category5: "Other",
     labelName: "Name",
     labelCompanyName: "Company",
     labelDepartment: "Department",
@@ -802,6 +817,7 @@ function applyLanguage(lang) {
   setText("category-2", t.category2);
   setText("category-3", t.category3);
   setText("category-4", t.category4);
+  setText("category-5", t.category5);
   setText("label-name", t.labelName);
   setText("label-company-name", t.labelCompanyName);
   setText("label-department", t.labelDepartment);
@@ -867,4 +883,5 @@ contactForm.addEventListener("submit", (event) => {
   sessionStorage.setItem(storageKey, JSON.stringify(savedData));
 });
 </script>
+</body>
 </html>
