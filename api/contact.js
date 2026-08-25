@@ -3,6 +3,7 @@ const { Resend } = require("resend");
 const categoryLabels = {
   フランチャイズ: "Franchise",
   システム開発: "System Development",
+  トレカDXシステム: "Toreca DX System",
   業務提携: "Business Alliance",
   その他: "Other",
 };
@@ -17,7 +18,6 @@ function requiredFieldsValid(payload) {
   return (
     categories.length > 0 &&
     Boolean(payload.lastName?.trim()) &&
-    Boolean(payload.firstName?.trim()) &&
     Boolean(payload.email?.trim()) &&
     Boolean(payload.emailConfirm?.trim()) &&
     Boolean(payload.message?.trim()) &&
