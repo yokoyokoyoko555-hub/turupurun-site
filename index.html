@@ -485,12 +485,11 @@ main {
                 </ul>
               </li>
               <li>
-                <span id="trading-authentication">鑑定代行サービス</span>
-              </li>
-              <li>
                 <span id="trading-franchise">フランチャイズ事業</span>
                 <ul class="level-2">
-                  <li id="trading-franchise-note">加盟店募集中</li>
+                  <li>
+                    <a class="inline-link" id="trading-franchise-note" href="https://franchise.torecabinks.com/" target="_blank" rel="noopener noreferrer">加盟店募集中</a>
+                  </li>
                 </ul>
               </li>
             </ul>
@@ -501,7 +500,7 @@ main {
           <div class="row-label" id="label-systems">システム開発事業</div>
           <div class="row-body">
             <ul class="level-1">
-              <li id="system-masterboy">トレカ専門店運営システム　マスターボーイ</li>
+              <li id="system-masterboy">トレカDXシステム　マスターボーイ</li>
               <li id="system-imailuka">受注管理システム　イマイルカ</li>
             </ul>
           </div>
@@ -702,11 +701,10 @@ const translations = {
     tradingEcLabel: "ECサイト",
     tradingEcLink: "トレカビンクス",
     tradingEcLink2: "トレカビンクス通販2号店",
-    tradingAuthentication: "鑑定代行サービス",
     tradingFranchise: "フランチャイズ事業",
     tradingFranchiseNote: "加盟店募集中",
     labelSystems: "システム開発事業",
-    systemMasterboy: "トレカ専門店運営システム　マスターボーイ",
+    systemMasterboy: "トレカDXシステム　マスターボーイ",
     systemImailuka: "受注管理システム　イマイルカ",
     sectionCompanyTitle: "会社概要",
     companyNameLabel: "社名",
@@ -759,11 +757,10 @@ const translations = {
     tradingEcLabel: "E-commerce",
     tradingEcLink: "Toreca Binks",
     tradingEcLink2: "Toreca Binks Online Store No. 2",
-    tradingAuthentication: "Grading Submission Service",
     tradingFranchise: "Franchise Business",
     tradingFranchiseNote: "Now Recruiting Franchise Partners",
     labelSystems: "System Development Business",
-    systemMasterboy: "Trading Card Store Management System  Master Boy",
+    systemMasterboy: "Toreca DX System  Master Boy",
     systemImailuka: "Order Management System  iMailuka",
     sectionCompanyTitle: "Company",
     companyNameLabel: "Company Name",
@@ -831,7 +828,6 @@ function applyLanguage(lang) {
   setText("trading-ec-label", t.tradingEcLabel);
   setText("trading-ec-link", t.tradingEcLink);
   setText("trading-ec-link-2", t.tradingEcLink2);
-  setText("trading-authentication", t.tradingAuthentication);
   setText("trading-franchise", t.tradingFranchise);
   setText("trading-franchise-note", t.tradingFranchiseNote);
   setText("label-systems", t.labelSystems);
