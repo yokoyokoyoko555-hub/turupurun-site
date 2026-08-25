@@ -9,6 +9,7 @@ const publicPages = new Set([
   "index",
   "trading",
   "systems",
+  "toreca-dx",
   "privacy",
   "imailuka",
   "confirm",

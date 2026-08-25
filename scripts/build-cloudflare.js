@@ -57,6 +57,7 @@ if (project === "franchise") {
     "index.html",
     "trading.html",
     "systems.html",
+    "toreca-dx.html",
     "privacy.html",
     "imailuka.html",
     "confirm.html",
