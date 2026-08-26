@@ -214,6 +214,7 @@ main {
 
 #contact.section {
   margin-bottom: 24px;
+  scroll-margin-top: 24px;
 }
 
 .contact-form {
@@ -639,9 +640,30 @@ if ("scrollRestoration" in history) {
   history.scrollRestoration = "manual";
 }
 
+function scrollToCurrentHash() {
+  if (!window.location.hash) return false;
+
+  const targetId = decodeURIComponent(window.location.hash.slice(1));
+  const target = document.getElementById(targetId);
+  if (!target) return false;
+
+  target.scrollIntoView({ behavior: "auto", block: "start" });
+  return true;
+}
+
+function scheduleCurrentHashScroll() {
+  if (!window.location.hash) return;
+
+  requestAnimationFrame(() => {
+    scrollToCurrentHash();
+    requestAnimationFrame(scrollToCurrentHash);
+  });
+}
+
 window.addEventListener("load", () => {
-  window.scrollTo(0, 0);
+  if (!scrollToCurrentHash()) window.scrollTo(0, 0);
 });
+window.addEventListener("hashchange", scrollToCurrentHash);
 
 const contactForm = document.getElementById("contact-form");
 const langButtons = document.querySelectorAll(".lang-button");
@@ -837,8 +859,14 @@ function applyLanguage(lang) {
     button.classList.toggle("active", button.dataset.lang === lang);
   });
 
-  const nextUrl = lang === "en" ? "?lang=en" : window.location.pathname;
-  history.replaceState(null, "", nextUrl);
+  const nextUrl = new URL(window.location.href);
+  if (lang === "en") {
+    nextUrl.searchParams.set("lang", "en");
+  } else {
+    nextUrl.searchParams.delete("lang");
+  }
+  history.replaceState(null, "", `${nextUrl.pathname}${nextUrl.search}${nextUrl.hash}`);
+  scheduleCurrentHashScroll();
 }
 
 langButtons.forEach((button) => {
@@ -847,6 +875,8 @@ langButtons.forEach((button) => {
 
 const initialLang = new URLSearchParams(window.location.search).get("lang") === "en" ? "en" : "ja";
 applyLanguage(initialLang);
+scheduleCurrentHashScroll();
+if (document.fonts?.ready) document.fonts.ready.then(scrollToCurrentHash);
 
 contactForm.addEventListener("submit", (event) => {
   const checkedCategories = document.querySelectorAll('input[name="category"]:checked');
