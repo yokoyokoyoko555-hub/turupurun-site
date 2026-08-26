@@ -19,7 +19,7 @@ app.use((req, res, next) => {
 });
 
 app.get("/health", (_req, res) => {
-  res.status(200).json({ ok: true });
+  res.status(200).json({ ok: true, site: "franchise" });
 });
 
 app.use(

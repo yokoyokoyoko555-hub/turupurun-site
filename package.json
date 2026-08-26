@@ -3,9 +3,11 @@
   "private": true,
   "version": "1.0.0",
   "scripts": {
-    "start": "node server.js",
+    "start": "npm run start:franchise",
+    "start:franchise": "node server.js",
+    "start:toreca-dx": "node server-toreca-dx.js",
     "start:corporate": "node server-corporate.js",
-    "check": "node --check server.js && node --check server-corporate.js && node --check api/contact.js && node --check scripts/build-cloudflare.js",
+    "check": "node --check server.js && node --check server-toreca-dx.js && node --check server-corporate.js && node --check api/contact.js && node --check scripts/build-cloudflare.js && node scripts/check-deployment-targets.js",
     "build:cloudflare:corporate": "node scripts/build-cloudflare.js corporate",
     "build:cloudflare:franchise": "node scripts/build-cloudflare.js franchise",
     "deploy:cloudflare:franchise": "wrangler deploy --config wrangler.franchise.toml"
