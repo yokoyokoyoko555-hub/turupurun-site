@@ -5,6 +5,7 @@ const rootDir = path.join(__dirname, "..");
 const targets = [
   ["railway.json", "npm run start:franchise"],
   ["railway.toreca-dx.json", "npm run start:toreca-dx"],
+  ["railway.corporate.json", "npm run start:corporate"],
 ];
 
 for (const [fileName, expectedCommand] of targets) {
@@ -15,10 +16,6 @@ for (const [fileName, expectedCommand] of targets) {
     throw new Error(
       `${fileName}: startCommand must be "${expectedCommand}" (found "${actualCommand}")`,
     );
-  }
-
-  if (actualCommand.includes("corporate")) {
-    throw new Error(`${fileName}: corporate site must not be deployed on Railway`);
   }
 }
 

@@ -6,14 +6,13 @@
 | --- | --- | --- |
 | フランチャイズLP | Railway（フランチャイズLP専用プロジェクト） | `railway.json` / `npm run start:franchise` |
 | トレカDX LP | Railway（トレカDX LP専用プロジェクト） | `railway.toreca-dx.json` / `npm run start:toreca-dx` |
-| コーポレートサイト | Vercel | `vercel.json` |
+| コーポレートサイト | Railway（コーポレートサイト専用プロジェクト） | `railway.corporate.json` / `npm run start:corporate` |
 
 ## Railwayの設定
 
 - フランチャイズLPは、Railwayの **Config file path** に `/railway.json` を指定する。
 - トレカDX LPは、Railwayの **Config file path** に `/railway.toreca-dx.json` を指定する。
-- Railwayで `npm run start:corporate` を設定しない。
-- VercelのコーポレートサイトをRailwayへ接続しない。
+- コーポレートサイトは、Railwayの **Config file path** に `/railway.corporate.json` を指定する。
 
 ## 公開前の確認
 
@@ -21,4 +20,5 @@
 2. 各Railwayプロジェクトの `/health` を開き、`site` が意図した値であること。
    - フランチャイズLP: `franchise`
    - トレカDX LP: `toreca-dx`
+   - コーポレートサイト: `corporate`
 3. 公開URLのタイトルとファーストビューを目視確認すること。
