@@ -234,6 +234,10 @@ main {
         <div class="confirm-value" id="confirm-phone"></div>
       </div>
       <div class="confirm-row">
+        <div class="confirm-label" id="label-address">住所</div>
+        <div class="confirm-value" id="confirm-address"></div>
+      </div>
+      <div class="confirm-row">
         <div class="confirm-label" id="label-website">ウェブサイト</div>
         <div class="confirm-value" id="confirm-website"></div>
       </div>
@@ -281,6 +285,7 @@ const translations = {
     labelCompany: "貴社名",
     labelDepartment: "部署名",
     labelPhone: "電話番号",
+    labelAddress: "住所",
     labelWebsite: "ウェブサイト",
     labelEmail: "Email",
     labelMessage: "お問合せ内容",
@@ -308,6 +313,7 @@ const translations = {
     labelCompany: "Company",
     labelDepartment: "Department",
     labelPhone: "Phone Number",
+    labelAddress: "Address",
     labelWebsite: "Website",
     labelEmail: "Email",
     labelMessage: "Inquiry Details",
@@ -347,6 +353,7 @@ function applyLanguage(lang) {
   setText("label-company", t.labelCompany);
   setText("label-department", t.labelDepartment);
   setText("label-phone", t.labelPhone);
+  setText("label-address", t.labelAddress);
   setText("label-website", t.labelWebsite);
   setText("label-email", t.labelEmail);
   setText("label-message", t.labelMessage);
@@ -409,6 +416,7 @@ function fillValues() {
   fillText("confirm-company", getFieldValue("company_name"));
   fillText("confirm-department", getFieldValue("department_name"));
   fillText("confirm-phone", getFieldValue("phone_number"));
+  fillText("confirm-address", getFieldValue("address"));
   fillText("confirm-website", getFieldValue("website"));
   fillText("confirm-email", getFieldValue("email"));
   fillText("confirm-message", getFieldValue("message"));
@@ -435,6 +443,7 @@ document.getElementById("send-button").addEventListener("click", async () => {
     companyName: getFieldValue("company_name"),
     departmentName: getFieldValue("department_name"),
     phoneNumber: getFieldValue("phone_number"),
+    address: getFieldValue("address"),
     website: getFieldValue("website"),
     email: getFieldValue("email"),
     emailConfirm: getFieldValue("email_confirm"),

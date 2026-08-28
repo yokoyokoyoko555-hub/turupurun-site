@@ -554,8 +554,8 @@ main {
             <div class="form-field">
               <div class="choice-group">
                 <label><input type="checkbox" name="category" value="フランチャイズ"> <span id="category-1">フランチャイズ</span></label>
-                <label><input type="checkbox" name="category" value="システム開発"> <span id="category-2">システム開発</span></label>
-                <label><input type="checkbox" name="category" value="トレカDXシステム"> <span id="category-3">トレカDXシステム</span></label>
+                <label><input type="checkbox" name="category" value="トレカDXシステム"> <span id="category-2">トレカDXシステム</span></label>
+                <label><input type="checkbox" name="category" value="システム開発"> <span id="category-3">システム開発</span></label>
                 <label><input type="checkbox" name="category" value="業務提携"> <span id="category-4">業務提携</span></label>
                 <label><input type="checkbox" name="category" value="その他"> <span id="category-5">その他</span></label>
               </div>
@@ -590,6 +590,13 @@ main {
             <div class="form-label"><span id="label-phone">電話番号</span></div>
             <div class="form-field">
               <input class="form-input" type="tel" name="phone_number" placeholder="03-1234-5678">
+            </div>
+          </div>
+
+          <div class="form-item">
+            <div class="form-label"><span id="label-address">住所</span></div>
+            <div class="form-field">
+              <input class="form-input" type="text" name="address" placeholder="東京都豊島区東池袋1-23-5 新大同ビル4階">
             </div>
           </div>
 
@@ -709,14 +716,15 @@ const translations = {
     sectionContactTitle: "お問合せ",
     labelCategory: "カテゴリ",
     category1: "フランチャイズ",
-    category2: "システム開発",
-    category3: "トレカDXシステム",
+    category2: "トレカDXシステム",
+    category3: "システム開発",
     category4: "業務提携",
     category5: "その他",
     labelName: "お名前",
     labelCompanyName: "貴社名",
     labelDepartment: "部署名",
     labelPhone: "電話番号",
+    labelAddress: "住所",
     labelWebsite: "ウェブサイト",
     labelEmail: "Email",
     labelEmailConfirm: "Email（確認用）",
@@ -765,14 +773,15 @@ const translations = {
     sectionContactTitle: "Contact",
     labelCategory: "Category",
     category1: "Franchise",
-    category2: "System Development",
-    category3: "Toreca DX System",
+    category2: "Toreca DX System",
+    category3: "System Development",
     category4: "Business Alliance",
     category5: "Other",
     labelName: "Name",
     labelCompanyName: "Company",
     labelDepartment: "Department",
     labelPhone: "Phone Number",
+    labelAddress: "Address",
     labelWebsite: "Website",
     labelEmail: "Email",
     labelEmailConfirm: "Email (Confirmation)",
@@ -844,6 +853,7 @@ function applyLanguage(lang) {
   setText("label-company-name", t.labelCompanyName);
   setText("label-department", t.labelDepartment);
   setText("label-phone", t.labelPhone);
+  setText("label-address", t.labelAddress);
   setText("label-website", t.labelWebsite);
   setText("label-email", t.labelEmail);
   setText("label-email-confirm", t.labelEmailConfirm);
@@ -904,6 +914,7 @@ contactForm.addEventListener("submit", (event) => {
     company_name: formData.get("company_name") || "",
     department_name: formData.get("department_name") || "",
     phone_number: formData.get("phone_number") || "",
+    address: formData.get("address") || "",
     website: formData.get("website") || "",
     email: formData.get("email") || "",
     email_confirm: formData.get("email_confirm") || "",
