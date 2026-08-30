@@ -297,6 +297,11 @@ main {
   padding: 8px 12px;
 }
 
+.form-input-address {
+  width: 614px;
+  max-width: 100%;
+}
+
 .form-textarea {
   min-height: 180px;
   resize: vertical;
@@ -477,7 +482,12 @@ main {
                       <a href="https://www.tiktok.com/@tcgbinks" target="_blank" rel="noopener noreferrer">TikTok</a>
                     </div>
                   </li>
-                  <li><span id="trading-ec-label">ECサイト</span>　<a class="inline-link" id="trading-ec-link" href="https://torecabinks.ocnk.net/" target="_blank" rel="noopener noreferrer">トレカビンクス</a></li>
+                  <li>
+                    <span id="trading-ec-label">ECサイト</span>　<a class="inline-link" id="trading-ec-link" href="https://torecabinks.ocnk.net/" target="_blank" rel="noopener noreferrer">トレカビンクス</a>
+                    <div class="social-links">
+                      <a id="trading-ec-second-link" href="https://torecabinks2.ocnk.net/" target="_blank" rel="noopener noreferrer">トレカビンクス通販２号店</a>
+                    </div>
+                  </li>
                 </ul>
               </li>
               <li>
@@ -596,7 +606,7 @@ main {
           <div class="form-item">
             <div class="form-label"><span id="label-address">住所</span></div>
             <div class="form-field">
-              <input class="form-input" type="text" name="address" placeholder="東京都豊島区東池袋1-23-5 新大同ビル4階">
+              <input class="form-input form-input-address" type="text" name="address" placeholder="東京都豊島区東池袋1-23-5 新大同ビル4階">
             </div>
           </div>
 
@@ -691,6 +701,7 @@ const translations = {
     tradingStoreLink: "トレカビンクス池袋店",
     tradingEcLabel: "ECサイト",
     tradingEcLink: "トレカビンクス",
+    tradingEcSecondLink: "トレカビンクス通販２号店",
     tradingFranchise: "フランチャイズ事業",
     tradingFranchiseNote: "加盟店募集中",
     labelSystems: "システム開発事業",
@@ -748,6 +759,7 @@ const translations = {
     tradingStoreLink: "Toreca Binks Ikebukuro",
     tradingEcLabel: "E-commerce",
     tradingEcLink: "Toreca Binks",
+    tradingEcSecondLink: "Toreca Binks Online Store No. 2",
     tradingFranchise: "Franchise Business",
     tradingFranchiseNote: "Now Recruiting Franchise Partners",
     labelSystems: "System Development Business",
@@ -820,6 +832,7 @@ function applyLanguage(lang) {
   setText("trading-store-link", t.tradingStoreLink);
   setText("trading-ec-label", t.tradingEcLabel);
   setText("trading-ec-link", t.tradingEcLink);
+  setText("trading-ec-second-link", t.tradingEcSecondLink);
   setText("trading-franchise", t.tradingFranchise);
   setText("trading-franchise-note", t.tradingFranchiseNote);
   setText("label-systems", t.labelSystems);
