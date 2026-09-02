@@ -1123,6 +1123,22 @@ body { background:var(--fc-paper); color:var(--fc-ink); }
   font-size:1.25rem; font-weight:800; letter-spacing:.08em;
 }
 .hero-kicker::before { background:var(--fc-red); height:1px; width:42px; }
+.hero-card-notice {
+  display:inline-flex;
+  align-items:center;
+  width:fit-content;
+  margin:24px 0 18px;
+  padding:10px 20px;
+  border:2px solid var(--fc-red);
+  border-radius:6px;
+  background:var(--fc-red);
+  color:#fff;
+  font-size:clamp(1rem,1.45vw,1.3rem);
+  line-height:1.45;
+  font-weight:900;
+  letter-spacing:.025em;
+  box-shadow:5px 5px 0 #e7cbc6;
+}
 .page-title span,.page-title em {
   color:var(--fc-ink); background:transparent; padding:0; box-shadow:none; margin-bottom:0;
 }
@@ -1476,6 +1492,7 @@ footer { background:var(--fc-paper); }
     transform:rotate(11deg);
   }
   .hero-kicker { font-size:1rem; }
+  .hero-card-notice { margin:18px 0 14px; }
   .hero-message-title { font-size:1.02rem; }
   .hero-message-text { font-size:.8rem; line-height:1.9; }
   .format-strip { grid-template-columns:repeat(2,minmax(0,1fr)); }
@@ -1743,6 +1760,16 @@ h3,
     padding-top:32px;
     padding-bottom:34px;
   }
+  .hero-card-notice {
+    display:flex;
+    width:100%;
+    justify-content:center;
+    margin:16px 0 14px;
+    padding:9px 10px;
+    font-size:.92rem;
+    text-align:center;
+    box-shadow:4px 4px 0 #e7cbc6;
+  }
   .hero-message-text br {
     display:none;
   }
@@ -1899,6 +1926,7 @@ h3,
 <div class="page-hero">
   <div class="hero-inner">
   <div class="hero-kicker">フランチャイズ加盟店募集</div>
+  <div class="hero-card-notice">ワンピースカード以外のカードも取り扱い可能！</div>
   <h1 class="page-title"><span>あなたの街に</span><br><em>トレカビンクスを</em></h1>
   <div class="hero-message">
     <p class="hero-message-title">
