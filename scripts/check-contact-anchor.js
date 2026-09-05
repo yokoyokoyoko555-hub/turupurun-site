@@ -22,7 +22,7 @@ if (franchise.includes("?scroll=contact#contact")) {
   errors.push("Legacy contact query URL remains in franchise.html.");
 }
 
-const corporateContactLinks = franchise.match(/https:\/\/www\.turupurun\.com\/#contact/g) || [];
+const corporateContactLinks = franchise.match(/https:\/\/turupurun\.com\/#contact/g) || [];
 if (corporateContactLinks.length === 0) {
   errors.push("Franchise LP has no link to the corporate contact anchor.");
 }

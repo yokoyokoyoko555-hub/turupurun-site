@@ -226,6 +226,7 @@ main {
   grid-template-columns: 260px 1fr;
   gap: 32px;
   border-bottom: 1px solid #d9d9d9;
+  min-width: 0;
 }
 
 .form-label {
@@ -246,6 +247,19 @@ main {
   display: flex;
   align-items: flex-start;
   justify-content: flex-start;
+  min-width: 0;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
 }
 
 .field-stack {
@@ -434,6 +448,14 @@ main {
     padding: 8px 12px 10px;
   }
 
+  .form-input,
+  .form-input-address,
+  .form-textarea,
+  .split-inputs {
+    width: 100%;
+    min-width: 0;
+  }
+
   .split-inputs {
     grid-template-columns: 1fr;
   }
@@ -506,7 +528,7 @@ main {
           <div class="row-label" id="label-systems">システム開発事業</div>
           <div class="row-body">
             <ul class="level-1">
-              <li id="system-masterboy">トレカDXシステム　マスターボーイ</li>
+              <li id="system-masterboy">カドショ運営システム　マスターボーイ</li>
               <li id="system-imailuka">受注管理システム　イマイルカ</li>
             </ul>
           </div>
@@ -557,14 +579,14 @@ main {
     <section class="section" id="contact">
       <h2 class="section-title" id="section-contact-title">お問合せ</h2>
       <div class="contact-box">
-        <form class="contact-form" id="contact-form" action="confirm.html" method="get">
+        <form class="contact-form" id="contact-form" action="confirm.html" method="post">
           <input type="hidden" name="lang" id="form-lang" value="ja">
           <div class="form-item">
             <div class="form-label"><span id="label-category">カテゴリ</span> <span class="required-badge" data-required>必須</span></div>
-            <div class="form-field">
+            <div class="form-field" role="group" aria-labelledby="label-category">
               <div class="choice-group">
                 <label><input type="checkbox" name="category" value="フランチャイズ"> <span id="category-1">フランチャイズ</span></label>
-                <label><input type="checkbox" name="category" value="トレカDXシステム"> <span id="category-2">トレカDXシステム</span></label>
+                <label><input type="checkbox" name="category" value="カドショ運営システム"> <span id="category-2">カドショ運営システム</span></label>
                 <label><input type="checkbox" name="category" value="システム開発"> <span id="category-3">システム開発</span></label>
                 <label><input type="checkbox" name="category" value="業務提携"> <span id="category-4">業務提携</span></label>
                 <label><input type="checkbox" name="category" value="その他"> <span id="category-5">その他</span></label>
@@ -576,65 +598,67 @@ main {
             <div class="form-label"><span id="label-name">お名前</span> <span class="required-badge" data-required>必須</span></div>
             <div class="form-field">
               <div class="split-inputs">
-                <input class="form-input" type="text" name="last_name" placeholder="性" required>
-                <input class="form-input" type="text" name="first_name" placeholder="名" required>
+                <label class="sr-only" id="last-name-label" for="last-name">姓</label>
+                <input class="form-input" id="last-name" type="text" name="last_name" placeholder="姓" required>
+                <label class="sr-only" id="first-name-label" for="first-name">名</label>
+                <input class="form-input" id="first-name" type="text" name="first_name" placeholder="名" required>
               </div>
             </div>
           </div>
 
           <div class="form-item">
-            <div class="form-label"><span id="label-company-name">貴社名</span></div>
+            <label class="form-label" for="company-name"><span id="label-company-name">貴社名</span></label>
             <div class="form-field">
-              <input class="form-input" type="text" name="company_name" placeholder="株式会社ツルプルン">
+              <input class="form-input" id="company-name" type="text" name="company_name" placeholder="株式会社ツルプルン">
             </div>
           </div>
 
           <div class="form-item">
-            <div class="form-label"><span id="label-department">部署名</span></div>
+            <label class="form-label" for="department-name"><span id="label-department">部署名</span></label>
             <div class="form-field">
-              <input class="form-input" type="text" name="department_name" placeholder="通販事業部">
+              <input class="form-input" id="department-name" type="text" name="department_name" placeholder="通販事業部">
             </div>
           </div>
 
           <div class="form-item">
-            <div class="form-label"><span id="label-phone">電話番号</span></div>
+            <label class="form-label" for="phone-number"><span id="label-phone">電話番号</span></label>
             <div class="form-field">
-              <input class="form-input" type="tel" name="phone_number" placeholder="03-1234-5678">
+              <input class="form-input" id="phone-number" type="tel" name="phone_number" placeholder="03-1234-5678">
             </div>
           </div>
 
           <div class="form-item">
-            <div class="form-label"><span id="label-address">住所</span></div>
+            <label class="form-label" for="address"><span id="label-address">住所</span></label>
             <div class="form-field">
-              <input class="form-input form-input-address" type="text" name="address" placeholder="東京都豊島区東池袋1-23-5 新大同ビル4階">
+              <input class="form-input form-input-address" id="address" type="text" name="address" placeholder="東京都豊島区東池袋1-23-5 新大同ビル4階">
             </div>
           </div>
 
           <div class="form-item">
-            <div class="form-label"><span id="label-website">ウェブサイト</span></div>
+            <label class="form-label" for="website"><span id="label-website">ウェブサイト</span></label>
             <div class="form-field">
-              <input class="form-input" type="url" name="website" placeholder="https://turupurun.com">
+              <input class="form-input" id="website" type="url" name="website" placeholder="https://turupurun.com">
             </div>
           </div>
 
           <div class="form-item">
-            <div class="form-label"><span id="label-email">Email</span> <span class="required-badge" data-required>必須</span></div>
+            <label class="form-label" for="email"><span id="label-email">Email</span> <span class="required-badge" data-required>必須</span></label>
             <div class="form-field">
               <input class="form-input" type="email" name="email" id="email" placeholder="abcd1234@fmail.com" required>
             </div>
           </div>
 
           <div class="form-item">
-            <div class="form-label"><span id="label-email-confirm">Email（確認用）</span> <span class="required-badge" data-required>必須</span></div>
+            <label class="form-label" for="email-confirm"><span id="label-email-confirm">Email（確認用）</span> <span class="required-badge" data-required>必須</span></label>
             <div class="form-field">
               <input class="form-input" type="email" name="email_confirm" id="email-confirm" required>
             </div>
           </div>
 
           <div class="form-item">
-            <div class="form-label"><span id="label-message">お問合せ内容</span> <span class="required-badge" data-required>必須</span></div>
+            <label class="form-label" for="message"><span id="label-message">お問合せ内容</span> <span class="required-badge" data-required>必須</span></label>
             <div class="form-field">
-              <textarea class="form-textarea" name="message" required></textarea>
+              <textarea class="form-textarea" id="message" name="message" required></textarea>
             </div>
           </div>
 
@@ -705,7 +729,7 @@ const translations = {
     tradingFranchise: "フランチャイズ事業",
     tradingFranchiseNote: "加盟店募集中",
     labelSystems: "システム開発事業",
-    systemMasterboy: "トレカDXシステム　マスターボーイ",
+    systemMasterboy: "カドショ運営システム　マスターボーイ",
     systemImailuka: "受注管理システム　イマイルカ",
     sectionCompanyTitle: "会社概要",
     companyNameLabel: "社名",
@@ -727,11 +751,13 @@ const translations = {
     sectionContactTitle: "お問合せ",
     labelCategory: "カテゴリ",
     category1: "フランチャイズ",
-    category2: "トレカDXシステム",
+    category2: "カドショ運営システム",
     category3: "システム開発",
     category4: "業務提携",
     category5: "その他",
     labelName: "お名前",
+    lastNameLabel: "姓",
+    firstNameLabel: "名",
     labelCompanyName: "貴社名",
     labelDepartment: "部署名",
     labelPhone: "電話番号",
@@ -763,7 +789,7 @@ const translations = {
     tradingFranchise: "Franchise Business",
     tradingFranchiseNote: "Now Recruiting Franchise Partners",
     labelSystems: "System Development Business",
-    systemMasterboy: "Toreca DX System  Master Boy",
+    systemMasterboy: "Card Shop Operations System  Master Boy",
     systemImailuka: "Order Management System  iMailuka",
     sectionCompanyTitle: "Company",
     companyNameLabel: "Company Name",
@@ -785,11 +811,13 @@ const translations = {
     sectionContactTitle: "Contact",
     labelCategory: "Category",
     category1: "Franchise",
-    category2: "Toreca DX System",
+    category2: "Card Shop Management System",
     category3: "System Development",
     category4: "Business Alliance",
     category5: "Other",
     labelName: "Name",
+    lastNameLabel: "Last name",
+    firstNameLabel: "First name",
     labelCompanyName: "Company",
     labelDepartment: "Department",
     labelPhone: "Phone Number",
@@ -863,6 +891,8 @@ function applyLanguage(lang) {
   setText("category-4", t.category4);
   setText("category-5", t.category5);
   setText("label-name", t.labelName);
+  setText("last-name-label", t.lastNameLabel);
+  setText("first-name-label", t.firstNameLabel);
   setText("label-company-name", t.labelCompanyName);
   setText("label-department", t.labelDepartment);
   setText("label-phone", t.labelPhone);
@@ -902,18 +932,17 @@ scheduleCurrentHashScroll();
 if (document.fonts?.ready) document.fonts.ready.then(scrollToCurrentHash);
 
 contactForm.addEventListener("submit", (event) => {
+  event.preventDefault();
   const checkedCategories = document.querySelectorAll('input[name="category"]:checked');
   const email = document.getElementById("email").value.trim();
   const emailConfirm = document.getElementById("email-confirm").value.trim();
 
   if (checkedCategories.length === 0) {
-    event.preventDefault();
     alert(translations[currentLang].alertCategory);
     return;
   }
 
   if (email !== emailConfirm) {
-    event.preventDefault();
     alert(translations[currentLang].alertEmail);
     return;
   }
@@ -935,6 +964,7 @@ contactForm.addEventListener("submit", (event) => {
   };
 
   sessionStorage.setItem(storageKey, JSON.stringify(savedData));
+  window.location.href = currentLang === "en" ? "confirm.html?lang=en" : "confirm.html";
 });
 </script>
 </body>
