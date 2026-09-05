@@ -1324,6 +1324,28 @@ body { background:var(--fc-paper); color:var(--fc-ink); }
 }
 .feature-detail-rule { width:100%; height:1px; margin:24px 0 20px; background:var(--fc-red); opacity:.55; }
 .feature-detail-text { color:#514a45; font-size:.9rem; line-height:2.15; }
+.feature-detail-link {
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  margin-top:20px;
+  padding-bottom:5px;
+  border-bottom:2px solid var(--fc-red);
+  color:var(--fc-red);
+  font-size:.9rem;
+  line-height:1.6;
+  font-weight:800;
+  text-decoration:none;
+  transition:color .2s ease,border-color .2s ease;
+}
+.feature-detail-link:hover {
+  color:var(--fc-red-dark);
+  border-color:var(--fc-red-dark);
+}
+.feature-detail-link:focus-visible {
+  outline:3px solid rgba(166,25,38,.25);
+  outline-offset:4px;
+}
 .tool-list {
   display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:10px; margin-top:22px;
 }
@@ -2018,7 +2040,8 @@ h3,
         <p class="feature-detail-index">02</p>
         <h3 class="feature-detail-title">運営ノウハウ・店舗運営システムと継続的なサポート</h3>
         <div class="feature-detail-rule"></div>
-        <p class="feature-detail-text">実店舗で培った販売・買取・接客・在庫管理、大会・イベント運営のノウハウと、買取受付から在庫・価格管理、プライシング、X投稿までを効率化する店舗運営システムを提供します オーナー運営型では開業準備を支援し、開業後も商品・相場情報や集客の工夫を共有 店舗ごとの課題を整理し、改善提案を通じて継続的にサポートします 研修は別途費用で対応します</p>
+        <p class="feature-detail-text">実店舗で培った販売・買取・接客・在庫管理、大会・イベント運営のノウハウと、買取受付から在庫・価格管理、プライシング、各種SNSへの情報発信までを効率化する店舗運営システムを提供します オーナー運営型では開業準備を支援し、開業後も商品・相場情報や集客の工夫を共有 店舗ごとの課題を整理し、改善提案を通じて継続的にサポートします 研修は別途費用で対応します</p>
+        <a class="feature-detail-link" href="https://www.turupurun.com/toreca-dx.html" target="_blank" rel="noopener noreferrer">店舗運営を支える「カドショ運営システム」について詳しく見る →</a>
       </div>
     </article>
 
