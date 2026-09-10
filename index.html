@@ -178,6 +178,20 @@ main {
   padding-bottom: 1px;
 }
 
+.ec-site-row {
+  display: grid;
+  grid-template-columns: max-content minmax(0, 1fr);
+  align-items: start;
+  column-gap: 16px;
+}
+
+.ec-site-links {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 10px;
+}
+
 .inline-link::after,
 .social-links a::after {
   content: "↗";
@@ -504,10 +518,11 @@ main {
                       <a href="https://www.tiktok.com/@tcgbinks" target="_blank" rel="noopener noreferrer">TikTok</a>
                     </div>
                   </li>
-                  <li>
-                    <span id="trading-ec-label">ECサイト</span>　<a class="inline-link" id="trading-ec-link" href="https://torecabinks.ocnk.net/" target="_blank" rel="noopener noreferrer">トレカビンクス</a>
-                    <div class="social-links">
-                      <a id="trading-ec-second-link" href="https://torecabinks2.ocnk.net/" target="_blank" rel="noopener noreferrer">トレカビンクス通販２号店</a>
+                  <li class="ec-site-row">
+                    <span id="trading-ec-label">ECサイト</span>
+                    <div class="ec-site-links">
+                      <a class="inline-link" id="trading-ec-link" href="https://torecabinks.ocnk.net/" target="_blank" rel="noopener noreferrer">トレカビンクス</a>
+                      <a class="inline-link" id="trading-ec-second-link" href="https://torecabinks2.ocnk.net/" target="_blank" rel="noopener noreferrer">トレカビンクス通販２号店</a>
                     </div>
                   </li>
                 </ul>
@@ -528,7 +543,7 @@ main {
           <div class="row-label" id="label-systems">システム開発事業</div>
           <div class="row-body">
             <ul class="level-1">
-              <li id="system-masterboy">カドショ運営システム　マスターボーイ</li>
+              <li><span id="system-masterboy-label">カドショ運営システム</span>　<a class="inline-link" id="system-masterboy" href="https://lp.mistarboy.com/" target="_blank" rel="noopener noreferrer">マスターボーイ</a></li>
               <li id="system-imailuka">受注管理システム　イマイルカ</li>
             </ul>
           </div>
@@ -729,7 +744,8 @@ const translations = {
     tradingFranchise: "フランチャイズ事業",
     tradingFranchiseNote: "加盟店募集中",
     labelSystems: "システム開発事業",
-    systemMasterboy: "カドショ運営システム　マスターボーイ",
+    systemMasterboyLabel: "カドショ運営システム",
+    systemMasterboy: "マスターボーイ",
     systemImailuka: "受注管理システム　イマイルカ",
     sectionCompanyTitle: "会社概要",
     companyNameLabel: "社名",
@@ -789,7 +805,8 @@ const translations = {
     tradingFranchise: "Franchise Business",
     tradingFranchiseNote: "Now Recruiting Franchise Partners",
     labelSystems: "System Development Business",
-    systemMasterboy: "Card Shop Operations System  Master Boy",
+    systemMasterboyLabel: "Card Shop Operations System",
+    systemMasterboy: "Master Boy",
     systemImailuka: "Order Management System  iMailuka",
     sectionCompanyTitle: "Company",
     companyNameLabel: "Company Name",
@@ -864,6 +881,7 @@ function applyLanguage(lang) {
   setText("trading-franchise", t.tradingFranchise);
   setText("trading-franchise-note", t.tradingFranchiseNote);
   setText("label-systems", t.labelSystems);
+  setText("system-masterboy-label", t.systemMasterboyLabel);
   setText("system-masterboy", t.systemMasterboy);
   setText("system-imailuka", t.systemImailuka);
   setText("section-company-title", t.sectionCompanyTitle);
